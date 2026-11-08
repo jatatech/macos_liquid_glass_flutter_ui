@@ -1,0 +1,33 @@
+name: macos_ui
+description: Flutter widgets and themes implementing the current macOS design language.
+version: 0.9.0-dev.1
+publish_to: none
+homepage: "https://github.com/jatatech/macos_liquid_glass_flutter_ui"
+repository: "https://github.com/jatatech/macos_liquid_glass_flutter_ui"
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  macos_window_utils: 1.9.1
+  gradient_borders: ^1.0.2
+  appkit_ui_element_colors: ^1.0.1
+  equatable: ^2.0.7
+  vector_math: ^2.2.0
+
+dev_dependencies:
+  cupertino_icons: 1.0.8
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  mocktail: ^1.0.4
+
+flutter:
+  plugin:
+    platforms:
+      macos:
+        package: dev.macosui.macos_ui
+        pluginClass: MacOSUiPlugin

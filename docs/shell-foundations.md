@@ -1,0 +1,22 @@
+# Shell foundations
+
+Semantic shell roles and the live accessibility bridge support readable Flutter
+content and native Liquid Glass composition. Native/shared surfaces are documented
+in [the glass guide](liquid-glass.md); window integration remains owned by
+macos_window_utils.
+
+## Public usage and compatibility
+
+Use `package:macos_ui/macos_ui.dart`. `MacosChromeData.of(context)` resolves the nearest `MacosTheme`, live `MediaQuery.highContrast` and theme main-window state. Roles include canvas, sidebar, toolbar, foreground, secondary/disabled foreground, separator, focus ring, selection, hover and pressed. `backgroundFor(Set<WidgetState>)` prioritises disabled, pressed, selected, then hover. Focus is an independent outline. Shared content/sidebar metrics and radius are constants on this class. These are additive APIs, not a replacement for existing component themes or explicit styling overrides. The colour-role page demonstrates the roles.
+
+`MacosAccessibility.of(context)` provides `MacosAccessibilityData` with `available`, `reduceTransparency`, `reduceMotion` and `increaseContrast`. `MacosApp` installs the owning `MacosAccessibility` widget automatically. Standalone trees may install it under a `MediaQuery`. The native settings augment Flutter motion/contrast signals with logical OR; explicit light/dark appearance cannot suppress them. Existing constructors/imports remain unchanged.
+
+Behaviour changes: icon buttons are keyboard focusable, Enter/Space activate enabled commands, and keyboard focus has a visible ring. Toolbar icon commands expose their label even without a tooltip. Flat sidebar rows show hover/press/focus, use the shared selection role (including inactive and increased-contrast selection), preserve custom colour/shape overrides, grow with scaled text and keep selected text/icons legible on the pressed surface. Secondary click does not invoke primary commands; no new context menu is promised. See [navigation and toolbar contracts](shell-navigation.md) for disclosure/overflow behavior.
+
+`WallpaperTintedArea` and toolbar blur fall back to opaque backgrounds when transparency is reduced, contrast is increased or the native preference source is unavailable. This deliberately changes missing-plugin behaviour from attempted native tinting to a safe opaque surface. The gallery explicitly keeps tinting disabled even when the OS permits it. Consumers that request optional tinting should expect a conservative initial frame until native settings arrive. Existing native utilities continue owning window configuration, delegates and material views. Main-window utilities remain unsuitable as a general multi-window contract.
+
+## Bridge ownership and failures
+
+A dedicated EventChannel protocol carries a snapshot on listen and complete snapshots on `NSWorkspace.accessibilityDisplayOptionsDidChangeNotification`. Native code uses public AppKit APIs available below the package's macOS 12 build floor; no new deployment requirement. Observer callbacks and channel lifecycle use the main thread. The handler rejects non-null arguments, removes the previous observer before listening, and removes its observer/sink on cancellation and deinit. It owns no window/view and does not modify appearance settings.
+
+The isolated Dart transport shares one subscription among listeners and serialises activation/cancellation. It implements the EventChannel wire protocol with guarded method invocations because Flutter's convenience `receiveBroadcastStream` reports activation failures globally. Missing plugin, platform failure, stream error, null/malformed envelopes and incorrect field types select `available=false`, transparency reduced, and Flutter motion/contrast fallback. Widget disposal cancels the subscription; no timers or polling. The adapter is application-wide; per-window capability negotiation is not claimed.

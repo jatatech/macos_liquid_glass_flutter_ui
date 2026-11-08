@@ -1,0 +1,3 @@
+interface:
+  display_name: "Flutter macOS Golden Gate"
+  short_description: "Build consumers of this local macos_ui fork"
