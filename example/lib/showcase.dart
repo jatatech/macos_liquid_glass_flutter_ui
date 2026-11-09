@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show ThemeMode;
 import 'package:flutter/services.dart';
-import 'package:macos_ui/macos_ui.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
 
 import 'example_menu.dart';
 

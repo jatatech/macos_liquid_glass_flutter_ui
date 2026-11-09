@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-09 — package identity
+
+Rename the package/import to `macos_liquid_glass_ui`, with matching CocoaPods and
+SwiftPM distribution metadata. Widget APIs and native channel contracts are
+unchanged. See [migration](docs/migration.md) before updating consumers.
+
 ## 0.9.0-dev.1 — checkpoint update, 2026-11-09
 
 - Native window toolbar with typed search, semantic item placement, momentary and

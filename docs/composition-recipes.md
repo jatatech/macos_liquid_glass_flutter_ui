@@ -2,7 +2,7 @@
 
 Start with the person's task and content, then choose controls. This guide is a
 library-specific interpretation of Apple guidance, not HIG or support certification.
-Import `package:macos_ui/macos_ui.dart` and public Flutter libraries; inspect the
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart` and public Flutter libraries; inspect the
 resolved constructors, not just the pinned upstream inventory.
 
 ## Task contract before layout

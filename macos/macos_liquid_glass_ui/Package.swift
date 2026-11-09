@@ -4,17 +4,17 @@
 import PackageDescription
 
 let package = Package(
-  name: "macos_ui",
+  name: "macos_liquid_glass_ui",
   platforms: [
     .macOS("12.0")
   ],
   products: [
-    .library(name: "macos-ui", targets: ["macos_ui"])
+    .library(name: "macos-liquid-glass-ui", targets: ["macos_liquid_glass_ui"])
   ],
   dependencies: [],
   targets: [
     .target(
-      name: "macos_ui",
+      name: "macos_liquid_glass_ui",
       dependencies: [],
       resources: [
         .process("Resources")

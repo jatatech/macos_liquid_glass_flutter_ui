@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 const double _kScrollbarMinLength = 36.0;
 const double _kScrollbarMinOverscrollLength = 8.0;
@@ -12,7 +12,7 @@ const double _kScrollbarCrossAxisMargin = 2.0;
 
 /// A macOS-style scrollbar.
 ///
-/// Applications built with `macos_ui` will automatically apply this widget
+/// Applications built with `macos_liquid_glass_ui` will automatically apply this widget
 /// to [ScrollView]s as the default scrollbar.
 ///
 /// To explicitly add a scrollbar to a [ScrollView], wrap the scroll view

@@ -1,6 +1,6 @@
 # Menus and transient surfaces
 
-Import `package:macos_ui/macos_ui.dart`. Existing public constructors, exports,
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. Existing public constructors, exports,
 callbacks, route settings, Navigator selection, focus nodes and theme types remain
 available. The [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md) is available. The upstream inventory remains pinned;
 this document records local behaviour changes. The compiling example is

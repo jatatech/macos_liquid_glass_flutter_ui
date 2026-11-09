@@ -1,6 +1,6 @@
 # Getting started
 
-Import `package:macos_ui/macos_ui.dart` plus Flutter public widget libraries.
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart` plus Flutter public widget libraries.
 The package does not re-export Flutter widgets. Use actual exported constructors;
 private `src/` imports are for implementation, never consumer code.
 The optional [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md) and
@@ -15,7 +15,7 @@ Use a Git dependency in your Flutter application:
 dependencies:
   flutter:
     sdk: flutter
-  macos_ui:
+  macos_liquid_glass_ui:
     git:
       url: https://github.com/jatatech/macos_liquid_glass_flutter_ui.git
       ref: main

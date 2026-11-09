@@ -1,8 +1,8 @@
 import 'package:flutter/rendering.dart';
-import 'package:macos_ui/src/buttons/button_interaction.dart';
-import 'package:macos_ui/src/buttons/value_control.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/buttons/button_interaction.dart';
+import 'package:macos_liquid_glass_ui/src/buttons/value_control.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 /// A checkbox is a type of button that lets the user choose between
 /// two opposite states, actions, or values. A selected checkbox is

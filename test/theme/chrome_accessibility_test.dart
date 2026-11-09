@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart' show ThemeMode, WidgetState;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:macos_ui/macos_ui.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
 
 const channelName = 'dev.groovinchip.macos_ui/accessibility';
 

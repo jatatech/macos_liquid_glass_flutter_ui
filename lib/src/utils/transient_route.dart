@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 /// Shared modal ownership for Flutter alert and sheet surfaces.
 class MacosTransientRoute<T> extends PopupRoute<T> {

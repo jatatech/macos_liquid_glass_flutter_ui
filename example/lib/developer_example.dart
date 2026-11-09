@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:macos_ui/macos_ui.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
 
 /// Run with `flutter run -d macos -t lib/developer_example.dart`.
 Future<void> main() async {

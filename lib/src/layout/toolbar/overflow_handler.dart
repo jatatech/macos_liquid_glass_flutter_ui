@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 /// Signature of a function that is called to notify that the children
 /// that have been hidden due to overflow has changed.

@@ -2,9 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/layout/wallpaper_tinting_settings/global_wallpaper_tinting_settings.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/layout/wallpaper_tinting_settings/global_wallpaper_tinting_settings.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 import 'package:macos_window_utils/widgets/transparent_macos_sidebar.dart';
 
 /// A basic frame layout.
@@ -48,7 +48,7 @@ class MacosWindow extends StatefulWidget {
 
   /// Whether wallpaper tinting should be disabled.
   ///
-  /// By default, `macos_ui` applies wallpaper tinting to the application's
+  /// By default, `macos_liquid_glass_ui` applies wallpaper tinting to the application's
   /// window to match macOS' native appearance:
   ///
   /// <img src="https://user-images.githubusercontent.com/86920182/220182724-d78319d7-5c41-4e8c-b785-a73a6ea24927.jpg" width=640/>

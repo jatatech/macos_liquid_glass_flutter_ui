@@ -6,7 +6,7 @@ document content are unchanged. No native glass or new native channel is added.
 
 ## Public usage
 
-Import `package:macos_ui/macos_ui.dart`. The gallery's Buttons page compiles all
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. The gallery's Buttons page compiles all
 four controls through this import, with every push control size, secondary and
 disabled actions, long labels, icon commands, controlled disclosure and contextual
 help. For example, inside a `MacosApp`:

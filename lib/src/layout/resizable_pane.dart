@@ -1,9 +1,9 @@
 import 'dart:math' as math show max, min;
 
 import 'package:flutter/services.dart' show SystemMouseCursor;
-import 'package:macos_ui/src/layout/scrollbar.dart';
-import 'package:macos_ui/src/library.dart';
-import 'package:macos_ui/src/theme/macos_theme.dart';
+import 'package:macos_liquid_glass_ui/src/layout/scrollbar.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/theme/macos_theme.dart';
 
 /// Default value for [ResizablePane] top padding
 const EdgeInsets kResizablePaneSafeArea = EdgeInsets.only(top: 52);

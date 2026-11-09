@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'indicator_interaction.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
-import 'package:macos_ui/src/utils/content_color.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/utils/content_color.dart';
 
 const double _kCapacityIndicatorMinWidth = 100.0;
 

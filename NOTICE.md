@@ -16,7 +16,7 @@ components; see [CHANGELOG](CHANGELOG.md) and [migration](docs/migration.md).
 The screenshot shows this project's production gallery, not a copied Apple
 reference image. No Apple SDK headers are distributed as assets.
 
-The package/import is `macos_ui`; fork version is 0.9.0-dev.1. Upstream registry
+The package/import is `macos_liquid_glass_ui`; fork version is 0.9.0-dev.1. Upstream registry
 releases do not include these additions. This project does not imply Apple or
 upstream endorsement. Preserve this notice and the MIT licence when redistributing.
 

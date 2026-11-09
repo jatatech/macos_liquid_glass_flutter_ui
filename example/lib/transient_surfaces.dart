@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:macos_ui/macos_ui.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
 
 /// Document workflow using only the package's exported transient surfaces.
 class TransientSurfacesPage extends StatefulWidget {

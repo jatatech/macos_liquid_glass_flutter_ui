@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:macos_ui/src/platform/accessibility.dart';
-import 'package:macos_ui/src/layout/wallpaper_tinting_settings/global_wallpaper_tinting_settings.dart';
-import 'package:macos_ui/src/layout/wallpaper_tinting_settings/wallpaper_tinting_settings_builder.dart';
+import 'package:macos_liquid_glass_ui/src/platform/accessibility.dart';
+import 'package:macos_liquid_glass_ui/src/layout/wallpaper_tinting_settings/global_wallpaper_tinting_settings.dart';
+import 'package:macos_liquid_glass_ui/src/layout/wallpaper_tinting_settings/wallpaper_tinting_settings_builder.dart';
 import 'package:macos_window_utils/macos/ns_visual_effect_view_material.dart';
 import 'package:macos_window_utils/widgets/visual_effect_subview_container/visual_effect_subview_container.dart';
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart' show ThemeMode;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:macos_ui/macos_ui.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
 
 typedef Factory = Widget Function(VoidCallback? callback);
 

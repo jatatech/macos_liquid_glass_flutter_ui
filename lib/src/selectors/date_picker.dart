@@ -1,12 +1,12 @@
 import 'dart:math' as math;
 
 import 'package:flutter/rendering.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
-import 'package:macos_ui/src/buttons/button_interaction.dart';
-import 'package:macos_ui/src/selectors/picker_surface.dart';
-import 'package:macos_ui/src/selectors/caret_painters.dart';
-import 'package:macos_ui/src/selectors/keyboard_shortcut_runner.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/buttons/button_interaction.dart';
+import 'package:macos_liquid_glass_ui/src/selectors/picker_surface.dart';
+import 'package:macos_liquid_glass_ui/src/selectors/caret_painters.dart';
+import 'package:macos_liquid_glass_ui/src/selectors/keyboard_shortcut_runner.dart';
 
 /// Defines the possibles [MacosDatePicker] styles.
 enum DatePickerStyle {

@@ -1,7 +1,7 @@
 # Native window toolbar — additive consumer integration
 
 `MacosNativeToolbar` and `MacosNativeToolbarCommand` are exported by
-`package:macos_ui/macos_ui.dart`. This is a separate single-registrar-window API;
+`package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. This is a separate single-registrar-window API;
 the one-to-four text-descriptor floating host remains unchanged. It installs an
 actual AppKit NSToolbar, with native SF Symbol command groups in NSGlassEffectView
 on macOS 26+. By default the unified titlebar background is system-owned;

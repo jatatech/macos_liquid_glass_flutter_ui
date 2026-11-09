@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:macos_ui/src/library.dart';
-import 'package:macos_ui/src/theme/help_button_theme.dart';
-import 'package:macos_ui/src/theme/macos_colors.dart';
-import 'package:macos_ui/src/theme/macos_theme.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/theme/help_button_theme.dart';
+import 'package:macos_liquid_glass_ui/src/theme/macos_colors.dart';
+import 'package:macos_liquid_glass_ui/src/theme/macos_theme.dart';
 
 void main() {
   testWidgets('macos theme MacosThemeData equality 1', (tester) async {

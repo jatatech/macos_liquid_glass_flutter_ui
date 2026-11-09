@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:macos_ui/src/layout/wallpaper_tinting_settings/global_wallpaper_tinting_settings.dart';
+import 'package:macos_liquid_glass_ui/src/layout/wallpaper_tinting_settings/global_wallpaper_tinting_settings.dart';
 
 import 'wallpaper_tinting_settings_data.dart';
 

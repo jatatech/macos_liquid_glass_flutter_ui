@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:macos_ui/src/buttons/button_interaction.dart';
-import 'package:macos_ui/macos_ui.dart';
+import 'package:macos_liquid_glass_ui/src/buttons/button_interaction.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
 
 const double _kSliderMinWidth = 100.0;
 const double _kSliderBorderRadius = 16.0;

@@ -1,11 +1,11 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:async';
-import 'package:macos_ui/src/buttons/button_interaction.dart';
+import 'package:macos_liquid_glass_ui/src/buttons/button_interaction.dart';
 
 import 'package:flutter/services.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 const _methodChannel = MethodChannel('dev.groovinchip.macos_ui');
 const _eventChannel = EventChannel('dev.groovinchip.macos_ui/color_panel');

@@ -1,6 +1,6 @@
-import 'package:macos_ui/src/utils/transient_route.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/utils/transient_route.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 const _kSheetBorderRadius = BorderRadius.all(Radius.circular(12.0));
 const EdgeInsets _defaultInsetPadding = EdgeInsets.symmetric(

@@ -108,13 +108,13 @@ name validation/error recovery; Sliders and selectors supplies progress; Liquid
 Glass supplies actual native navigation/commands, modal occlusion and opaque
 comparison. These reuse existing flows rather than duplicating component demos.
 
-All gallery sources import `package:macos_ui/macos_ui.dart`; executable entry is
+All gallery sources import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`; executable entry is
 `lib/main.dart`. `lib/dense_content.dart` contains controlled table/sort callbacks;
 `lib/document_inspector.dart` contains draft commit/revert. Minimal public usage:
 
 ```dart
 import 'package:flutter/cupertino.dart';
-import 'package:macos_ui/macos_ui.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
 
 Widget documentTable(Object? selected, ValueChanged<Object> choose) =>
     MacosDataTable(

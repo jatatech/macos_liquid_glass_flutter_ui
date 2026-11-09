@@ -1,6 +1,6 @@
 /// Flutter widgets and themes implementing the current macOS design language.
 ///
-/// To use, `import 'package:macos_ui/macos_ui.dart';`
+/// To use, `import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';`
 ///
 /// This library targets macOS. Portable rendering paths are implemented, but
 /// other platform builds and runtimes remain unverified in this local fork.

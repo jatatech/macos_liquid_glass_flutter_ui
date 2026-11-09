@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:macos_ui/src/theme/macos_theme.dart';
+import 'package:macos_liquid_glass_ui/src/theme/macos_theme.dart';
 
 /// Defines the height of a regular-sized [TitleBar].
 const kTitleBarHeight = 28.0;

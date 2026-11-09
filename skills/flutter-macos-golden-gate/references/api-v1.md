@@ -1,8 +1,8 @@
 # API dictionary v1 — local consumer baseline
 
-Package identity: `macos_ui` 0.9.0-dev.1. Inspect the actual resolved source
+Package identity: `macos_liquid_glass_ui` 0.9.0-dev.1. Inspect the actual resolved source
 for the API revision used by your application. Registry upstream releases differ.
-All entries below are exported by [the public barrel](../../../lib/macos_ui.dart).
+All entries below are exported by [the public barrel](../../../lib/macos_liquid_glass_ui.dart).
 Links into `lib/src` are for inspecting definitions, **never consumer imports**.
 Selected argument lists below name required parameters and useful defaults; they
 are not full signatures. Follow the source link for parameter types and all options.

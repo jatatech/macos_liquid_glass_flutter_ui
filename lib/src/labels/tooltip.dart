@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:macos_ui/src/utils/native_occlusion.dart';
+import 'package:macos_liquid_glass_ui/src/utils/native_occlusion.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
-import 'package:macos_ui/src/utils/transient_anchor.dart';
+import 'package:macos_liquid_glass_ui/src/utils/transient_anchor.dart';
 import 'package:flutter/rendering.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 /// Tooltips, succinctly describe how to use controls without shifting
 /// people’s focus away from the primary interface. Tooltips appear when

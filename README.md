@@ -10,13 +10,13 @@ with native AppKit toolbars, controlled search, coordinated panes and accessible
 
 ```yaml
 dependencies:
-  macos_ui:
+  macos_liquid_glass_ui:
     git:
       url: https://github.com/jatatech/macos_liquid_glass_flutter_ui.git
       ref: main
 ```
 
-Import `package:macos_ui/macos_ui.dart`. Follow [Getting started](docs/developer-guide.md)
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. Follow [Getting started](docs/developer-guide.md)
 for macOS host setup and a complete first app. Pin a reviewed commit for reproducible builds.
 
 ## Explore

@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 /// Defines the height of a regular-sized [SliverToolBar]
 const _kToolbarHeight = 52.0;
@@ -146,7 +146,7 @@ class SliverToolBar extends StatefulWidget with Diagnosticable {
   /// currently visible on the screen (that is, not e.g. hidden by an
   /// [IndexedStack]).
   ///
-  /// By default, macos_ui applies wallpaper tinting to the application's
+  /// By default, macos_liquid_glass_ui applies wallpaper tinting to the application's
   /// window to match macOS' native appearance:
   ///
   /// <img src="https://user-images.githubusercontent.com/86920182/220182724-d78319d7-5c41-4e8c-b785-a73a6ea24927.jpg" width=640/>

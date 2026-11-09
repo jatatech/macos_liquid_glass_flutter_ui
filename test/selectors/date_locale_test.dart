@@ -3,7 +3,7 @@ import 'package:flutter/material.dart'
     show DefaultMaterialLocalizations, MaterialLocalizations;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:macos_ui/macos_ui.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
 
 // Isolates the week-start contract from a particular SDK translation catalogue.
 class _SaturdayLocalizations extends DefaultMaterialLocalizations {

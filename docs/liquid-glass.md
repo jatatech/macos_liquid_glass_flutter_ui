@@ -4,7 +4,7 @@
 policy and native ownership. `MacosGlassCommandSurface` adds floating command
 layout and equivalent Flutter controls for approximation/opaque fallback.
 Native mode uses actual AppKit NSGlassEffectView on supported macOS.
-Import `package:macos_ui/macos_ui.dart`. See [support](support.md) for tested scope
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. See [support](support.md) for tested scope
 and [the consumer skill](../skills/flutter-macos-golden-gate/SKILL.md) for integration.
 
 ## Native window chrome or floating glass

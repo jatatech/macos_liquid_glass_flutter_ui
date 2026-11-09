@@ -1,6 +1,6 @@
 # Dense text tables
 
-Import `package:macos_ui/macos_ui.dart`. The additive `MacosDataTable`,
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. The additive `MacosDataTable`,
 `MacosTableColumn` and `MacosTableRow` exports implement a bounded, flat text table.
 The public-import [document browser](../example/lib/dense_content.dart) compares
 120 working / 24 archived documents by title, author, modified date and size,

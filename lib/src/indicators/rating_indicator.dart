@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'indicator_interaction.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
-import 'package:macos_ui/src/utils/content_color.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/utils/content_color.dart';
 
 /// A rating indicator uses a series of horizontally arranged
 /// graphical symbols to communicate a ranking level. The

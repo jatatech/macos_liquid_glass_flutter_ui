@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:macos_ui/src/buttons/value_control.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/buttons/value_control.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 const _kDefaultBorderColor = CupertinoDynamicColor.withBrightness(
   color: MacosColor.fromRGBO(215, 215, 215, 1.0),

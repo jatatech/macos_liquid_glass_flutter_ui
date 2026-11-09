@@ -7,7 +7,7 @@ their existing ownership. These controls add no native glass or channels.
 
 ## Usage and state ownership
 
-Import `package:macos_ui/macos_ui.dart`. The gallery's Value controls page uses
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. The gallery's Value controls page uses
 this public import for document sync in all three switch sizes, mixed attachment
 selection, enabled/disabled storage choices and preview-detail choices. Principal child-view switching uses `MacosTabView`;
 see [task recipes](composition-recipes.md). The existing controller-backed

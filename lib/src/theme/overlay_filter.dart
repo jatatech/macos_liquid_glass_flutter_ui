@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/layout/wallpaper_tinting_settings/wallpaper_tinting_override.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/layout/wallpaper_tinting_settings/wallpaper_tinting_override.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 /// {@template macosOverlayFilter}
 /// Applies a blur filter to its child to create a macOS-style "frosted glass"

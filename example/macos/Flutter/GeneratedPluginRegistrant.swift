@@ -6,7 +6,7 @@ import FlutterMacOS
 import Foundation
 
 import appkit_ui_element_colors
-import macos_ui
+import macos_liquid_glass_ui
 import macos_window_utils
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {

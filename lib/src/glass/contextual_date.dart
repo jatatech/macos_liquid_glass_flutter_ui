@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:macos_ui/macos_ui.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
 
 /// Civil Gregorian days, independent of UTC offsets. Native presentation uses a
 /// Gregorian calendar in UTC with localized labels. No instant/time is selected.

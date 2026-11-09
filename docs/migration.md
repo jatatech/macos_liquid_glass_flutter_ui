@@ -1,7 +1,29 @@
 # Migrating from upstream macos_ui
 
+## Package identity migration — 9 November 2026
+
+Replace the dependency key `macos_ui` with `macos_liquid_glass_ui`, retaining
+this repository's Git source or your local checkout path. Replace imports of
+`package:macos_ui/macos_ui.dart` with
+`package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. The old barrel is not
+shipped. Run `flutter pub get` in every consumer to regenerate its lockfile,
+package configuration and native plugin registration, then fully rebuild macOS
+apps (hot reload cannot migrate a native module). Do not hand-edit generated
+registrants or lockfiles. Remove stale build/Pods artifacts if a host still
+references the old module, then resolve again.
+
+CocoaPods uses `macos_liquid_glass_ui`; SwiftPM uses package/target
+`macos_liquid_glass_ui` and product `macos-liquid-glass-ui`. Privacy resources
+move with the target. The native `MacOSUiPlugin` registration class,
+`dev.groovinchip.macos_ui` method/event channels and toolbar identifier prefix
+remain intentional implementation contracts. Do not register both packages in
+one engine: they share those channels. Existing widget names, constructors,
+callbacks and upstream MIT provenance remain unchanged. Registry publication
+remains disabled; this is a source dependency migration at `0.9.0-dev.1`.
+
+
 This fork adopts upstream revision `dec19cf6960721f80165ead6c9c19594030b292f`
-with its MIT notices. Keep `package:macos_ui/macos_ui.dart` and the existing
+with its MIT notices. Use `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart` and the existing
 `MacosApp`, `MacosTheme`, `MacosWindow`, `MacosScaffold`, `Sidebar`, `ToolBar`
 APIs. Depend on this Git source; upstream registry releases differ.
 

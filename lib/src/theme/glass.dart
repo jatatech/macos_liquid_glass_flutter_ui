@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:macos_ui/src/enums/glass_rendering.dart';
-import 'package:macos_ui/src/platform/accessibility.dart';
+import 'package:macos_liquid_glass_ui/src/enums/glass_rendering.dart';
+import 'package:macos_liquid_glass_ui/src/platform/accessibility.dart';
 
 /// Shared semantic effect tokens and glass selection policy.
 class MacosGlassData {

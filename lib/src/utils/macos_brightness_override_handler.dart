@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:macos_ui/macos_ui.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
 
 /// A class that ensures that the application’s macOS window’s brightness
 /// matches the given brightness.

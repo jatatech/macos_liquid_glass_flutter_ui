@@ -1,15 +1,15 @@
 ---
 name: flutter-macos-golden-gate
-description: Build or repair macOS Flutter consumers of this repository's local macos_ui fork, including its shell, controls and native Liquid Glass surfaces. Use for this library's API selection, composition, migration and fallback diagnosis; not generic Flutter, iOS glass or unrelated glass packages.
+description: Build or repair macOS Flutter consumers of this repository's macos_liquid_glass_ui fork, including its shell, controls and native Liquid Glass surfaces. Use for this library's API selection, composition, migration and fallback diagnosis; not generic Flutter, iOS glass or unrelated glass packages.
 ---
 
 # Flutter macOS Golden Gate
 
 Use the consumer's actual dependency source. This repository is a fork named
-`macos_ui`, now pre-release **0.9.0-dev.1**; the former **2.2.3** metadata
+`macos_liquid_glass_ui`, now pre-release **0.9.0-dev.1**; the former **2.2.3** metadata
 was inherited upstream identity. This fork uses its own pre-1.0 sequence; registry
 upstream releases do not include its additions. Inspect the consumer's
-pubspec/lock/package configuration and the resolved `lib/macos_ui.dart` before generating code. Compare this dictionary with the resolved public source revision.
+pubspec/lock/package configuration and the resolved `lib/macos_liquid_glass_ui.dart` before generating code. Compare this dictionary with the resolved public source revision.
 Do not substitute a registry dependency for the user's local checkout.
 
 Before selecting widgets, read [task/composition recipes](../../docs/composition-recipes.md).
@@ -28,7 +28,7 @@ for names, constructor requirements, callbacks and component selection. It links
 to actual public source and owning guides; it is a selected dictionary, not every
 optional styling parameter. Check the constructor before adding other arguments.
 
-Use `package:macos_ui/macos_ui.dart` plus Flutter public imports. Preserve
+Use `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart` plus Flutter public imports. Preserve
 `MacosApp`, `MacosTheme`, `MacosWindow`, `MacosScaffold`, `Sidebar` and `ToolBar`.
 `Label` and `MacosDataTable` are real names; `MacosLabel`, `MacosTable` and an
 invented native-menu API are not. Do not import private `src/` paths, substitute

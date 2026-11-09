@@ -1,6 +1,6 @@
 # Localization and directional shell
 
-Use `package:macos_ui/macos_ui.dart`. The app supplies supported locales and
+Use `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. The app supplies supported locales and
 Material/Widgets/Cupertino localization delegates to `MacosApp`, translates its
 commands and content, and chooses calendar/bounds. See the compiling
 [German/Arabic/Hebrew example](../example/lib/localization_example.dart). Run it

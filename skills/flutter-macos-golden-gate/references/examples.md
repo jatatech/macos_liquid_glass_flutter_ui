@@ -8,7 +8,7 @@ references or resolve the equivalent files in the actual dependency source.
 ## Minimal shell, settings, table and shared native/fallback surface
 
 [developer_example.dart](../../../example/lib/developer_example.dart) is a complete
-entrypoint with public Flutter imports and `package:macos_ui/macos_ui.dart`.
+entrypoint with public Flutter imports and `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`.
 [Setup](../../../docs/developer-guide.md) supplies the local path dependency and
 host configuration. From repository `example/`:
 

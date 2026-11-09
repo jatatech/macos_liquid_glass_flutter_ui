@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:appkit_ui_element_colors/appkit_ui_element_colors.dart';
 import 'package:flutter/foundation.dart';
-import 'package:macos_ui/src/enums/accent_color.dart';
+import 'package:macos_liquid_glass_ui/src/enums/accent_color.dart';
 
 /// A class that listens for changes to the user’s selected system accent color.
 ///
@@ -125,9 +125,9 @@ class AccentColorListener {
     debugPrint(
       'Warning: Falling back on slow accent color resolution. It’s possible '
       'that the accent colors have changed in a recent version of macOS, thus '
-      'invalidating macos_ui’s accent colors, which were captured on macOS '
+      'invalidating macos_liquid_glass_ui’s accent colors, which were captured on macOS '
       'Ventura. If you see this message, please notify a maintainer of the '
-      'macos_ui package.',
+      'macos_liquid_glass_ui package.',
     );
 
     return _slowlyResolveAccentColorFromHueComponent(hueComponent);

@@ -1,9 +1,9 @@
-import 'package:macos_ui/src/buttons/segmented_control.dart';
-import 'package:macos_ui/src/layout/tab_view/tab.dart';
-import 'package:macos_ui/src/layout/tab_view/tab_controller.dart';
-import 'package:macos_ui/src/library.dart';
-import 'package:macos_ui/src/theme/chrome.dart';
-import 'package:macos_ui/src/layout/tab_view/tab_navigation.dart';
+import 'package:macos_liquid_glass_ui/src/buttons/segmented_control.dart';
+import 'package:macos_liquid_glass_ui/src/layout/tab_view/tab.dart';
+import 'package:macos_liquid_glass_ui/src/layout/tab_view/tab_controller.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/theme/chrome.dart';
+import 'package:macos_liquid_glass_ui/src/layout/tab_view/tab_navigation.dart';
 
 const _kTabViewRadius = BorderRadius.all(Radius.circular(5.0));
 

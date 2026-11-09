@@ -1,4 +1,4 @@
-name: macos_ui
+name: macos_liquid_glass_ui
 description: Flutter widgets and themes implementing the current macOS design language.
 version: 0.9.0-dev.1
 publish_to: none
@@ -29,5 +29,5 @@ flutter:
   plugin:
     platforms:
       macos:
-        package: dev.macosui.macos_ui
+        package: dev.macosui.macos_liquid_glass_ui
         pluginClass: MacOSUiPlugin

@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 class CommandMenu extends StatefulWidget {
   const CommandMenu({super.key, required this.children, this.color});

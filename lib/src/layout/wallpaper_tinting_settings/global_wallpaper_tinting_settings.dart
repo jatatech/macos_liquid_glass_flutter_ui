@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:macos_ui/src/layout/wallpaper_tinting_settings/wallpaper_tinting_settings_data.dart';
+import 'package:macos_liquid_glass_ui/src/layout/wallpaper_tinting_settings/wallpaper_tinting_settings_data.dart';
 
 /// A class that provides a global instance of [WallpaperTintingSettingsData].
 class GlobalWallpaperTintingSettings {

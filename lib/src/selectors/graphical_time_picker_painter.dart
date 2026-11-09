@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 /// {@template graphicalTimePickerPainter}
 /// A [CustomPainter] that recreates the native macOS graphical time picker.

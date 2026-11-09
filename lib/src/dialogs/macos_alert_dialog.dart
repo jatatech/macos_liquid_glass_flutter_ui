@@ -1,6 +1,6 @@
-import 'package:macos_ui/src/utils/transient_route.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/utils/transient_route.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 const _kDialogBorderRadius = BorderRadius.all(Radius.circular(12.0));
 const _kDefaultDialogConstraints = BoxConstraints(minWidth: 260, maxWidth: 260);

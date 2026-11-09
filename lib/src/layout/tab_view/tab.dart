@@ -1,5 +1,5 @@
-import 'package:macos_ui/src/library.dart';
-import 'package:macos_ui/src/theme/chrome.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/theme/chrome.dart';
 
 const _kTabBorderRadius = BorderRadius.all(Radius.circular(4.0));
 

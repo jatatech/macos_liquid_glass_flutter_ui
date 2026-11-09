@@ -5,7 +5,7 @@ native window ownership and dependencies are unchanged.
 
 ## Public use and behaviour
 
-Import `package:macos_ui/macos_ui.dart`. `MacosListTile` keeps its existing
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. `MacosListTile` keeps its existing
 constructor arguments and adds `selected` (false), `enabled` (true) and optional
 caller-owned `focusNode`. Selection is controlled: a click invokes `onClick`,
 and the consumer rebuilds `selected`. Enter/Space activate once on key release;

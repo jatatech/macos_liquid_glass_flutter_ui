@@ -1,4 +1,4 @@
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 /// An immutable 32 bit color value in ARGB format.
 class MacosColor extends Color {

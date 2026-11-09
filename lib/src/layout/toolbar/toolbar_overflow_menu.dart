@@ -1,6 +1,6 @@
-import 'package:macos_ui/src/utils/command_menu.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/utils/command_menu.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 /// A menu that includes all overflowed toolbar actions.
 class ToolbarOverflowMenu extends StatelessWidget {

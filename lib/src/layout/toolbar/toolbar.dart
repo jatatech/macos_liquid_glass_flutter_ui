@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/layout/toolbar/overflow_handler.dart';
-import 'package:macos_ui/src/layout/wallpaper_tinting_settings/wallpaper_tinting_override.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/layout/toolbar/overflow_handler.dart';
+import 'package:macos_liquid_glass_ui/src/layout/wallpaper_tinting_settings/wallpaper_tinting_override.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 /// Defines the height of a regular-sized [ToolBar]
 const _kToolbarHeight = 52.0;
@@ -131,7 +131,7 @@ class ToolBar extends StatefulWidget with Diagnosticable {
   ///
   /// This parameter only needs to be supplied when [enableBlur] is true.
   ///
-  /// By default, macos_ui applies wallpaper tinting to the application's
+  /// By default, macos_liquid_glass_ui applies wallpaper tinting to the application's
   /// window to match macOS' native appearance:
   ///
   /// <img src="https://user-images.githubusercontent.com/86920182/220182724-d78319d7-5c41-4e8c-b785-a73a6ea24927.jpg" width=640/>

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'document_inspector.dart';
-import 'package:macos_ui/macos_ui.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
 
 /// A bounded document workflow using only implemented public package APIs.
 class DocumentBrowser extends StatefulWidget {

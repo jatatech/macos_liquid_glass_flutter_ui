@@ -1,6 +1,6 @@
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
-import 'package:macos_ui/src/utils/content_color.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/src/utils/content_color.dart';
 
 /// A label is a static text field that describes an onscreen interface
 /// element or provides a short message. Although people can’t edit labels,

@@ -1,8 +1,8 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
-import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui/src/library.dart';
+import 'package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart';
+import 'package:macos_liquid_glass_ui/src/library.dart';
 
 /// Controls the default color, opacity, and size of icons in a widget subtree.
 ///
@@ -46,8 +46,8 @@ class MacosIconTheme extends InheritedTheme {
   /// are null get defaulted to the values specified on
   /// [MacosIconThemeData.fallback].
   ///
-  /// The [MacosTheme] widget from the `macos_ui` library introduces a [MacosIconTheme]
-  /// widget set to the [MacosThemeData.iconTheme], so in a macos_ui-style
+  /// The [MacosTheme] widget from the `macos_liquid_glass_ui` library introduces a [MacosIconTheme]
+  /// widget set to the [MacosThemeData.iconTheme], so in a macos_liquid_glass_ui-style
   /// application, this will typically default to the icon theme from the
   /// ambient [MacosTheme].
   ///

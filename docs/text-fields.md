@@ -1,6 +1,6 @@
 # Text and search fields
 
-Import `package:macos_ui/macos_ui.dart`. Flutter owns editing, selection,
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. Flutter owns editing, selection,
 shortcuts and composition; native window ownership is unchanged; [support and verification scope](../docs/support.md) govern current glass composition.
 The public-import gallery's Text and search page demonstrates document naming,
 inline validation, a selectable reference, a disabled managed value and search.

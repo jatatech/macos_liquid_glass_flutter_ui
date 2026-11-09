@@ -6,7 +6,7 @@ panel. Existing `macos_window_utils` window ownership is unchanged.
 
 ## Public usage
 
-Import `package:macos_ui/macos_ui.dart`; time values additionally use
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`; time values additionally use
 `package:flutter/material.dart`'s `TimeOfDay` (as before). The gallery's
 **Sliders and selectors** page compiles a complete export-settings flow using
 only public imports. The [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md) is available. The pinned upstream inventory

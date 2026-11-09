@@ -6,7 +6,7 @@ Existing `macos_window_utils` integration retains window ownership.
 
 ## Navigation contract
 
-Import `package:macos_ui/macos_ui.dart`. Existing public widget types,
+Import `package:macos_liquid_glass_ui/macos_liquid_glass_ui.dart`. Existing public widget types,
 constructors, callbacks and exports remain intact. The [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md)
 and [task recipes](composition-recipes.md) describe current composition choices. `SidebarItems.currentIndex` counts selectable leaves in
 depth-first order, including collapsed leaves. Section headers and disclosure
