@@ -1,8 +1,9 @@
 # Text and search fields
 
 Import `package:macos_ui/macos_ui.dart`. Flutter owns editing, selection,
-shortcuts and composition. The Text and search gallery demonstrates document
-naming, inline validation, a selectable reference, disabled managed value and search.
+shortcuts and composition; native window ownership is unchanged; [support and verification scope](../docs/support.md) govern current glass composition.
+The public-import gallery's Text and search page demonstrates document naming,
+inline validation, a selectable reference, a disabled managed value and search.
 
 ## Editing and state contract
 
@@ -73,4 +74,7 @@ colours; `MacosSearchFieldTheme` background/highlight overrides remain respected
 Long default result labels ellipsize; custom children must fit their row.
 `maxResultsToShow` and `resultHeight` must be positive (asserted).
 
-Consumer examples and the gallery use only public imports.
+The [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md) is available. The upstream public API inventory stays pinned; this
+page records the additive API and behaviour migrations. No private imports are
+required by consumer examples or the gallery. Native/M2 code and dependencies
+were not changed.

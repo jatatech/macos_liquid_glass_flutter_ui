@@ -5,6 +5,7 @@ public class MacOSUiPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
   private let colorPanelProvider: ColorPanelProvider
   private var eventSink: FlutterEventSink?
   private var glassSurfaces: GlassCommandSurfaces?
+  private var windowToolbar: WindowToolbar?
 
   init(colorPanelProvider: ColorPanelProvider) {
     self.colorPanelProvider = colorPanelProvider
@@ -39,6 +40,18 @@ public class MacOSUiPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
         return
       }
       glassSurfaces.handle(call, result: result)
+    }
+    let toolbarChannel = FlutterMethodChannel(
+      name: "dev.groovinchip.macos_ui/window_toolbar", binaryMessenger: registrar.messenger)
+    let windowToolbar = WindowToolbar(
+      view: registrar.viewController?.view ?? registrar.view, channel: toolbarChannel)
+    instance.windowToolbar = windowToolbar
+    toolbarChannel.setMethodCallHandler { [weak windowToolbar] call, result in
+      guard let windowToolbar else {
+        result(false)
+        return
+      }
+      windowToolbar.handle(call, result: result)
     }
     colorSelectionChannel.setStreamHandler(colorPanelProvider)
     registrar.addMethodCallDelegate(instance, channel: channel)

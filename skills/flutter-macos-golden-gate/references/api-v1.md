@@ -1,10 +1,11 @@
-# Selected API dictionary — 0.9.0-dev.1
+# API dictionary v1 — local consumer baseline
 
-Package: this repository's `macos_ui` fork. Upstream registry releases differ.
+Package identity: `macos_ui` 0.9.0-dev.1. Inspect the actual resolved source
+for the API revision used by your application. Registry upstream releases differ.
 All entries below are exported by [the public barrel](../../../lib/macos_ui.dart).
-Links into `lib/src` inspect definitions; consumer imports must use the public
-barrel. These selected arguments are not complete signatures; check resolved
-source for actual types, optional values and changes after this pre-release.
+Links into `lib/src` are for inspecting definitions, **never consumer imports**.
+Selected argument lists below name required parameters and useful defaults; they
+are not full signatures. Follow the source link for parameter types and all options.
 
 ## Shell, theme and navigation
 
@@ -28,8 +29,8 @@ source for actual types, optional values and changes after this pre-release.
 
 Read [shell foundations](../../../docs/shell-foundations.md) for semantic roles
 and [navigation](../../../docs/shell-navigation.md) for recursive indices, keys,
-resizing and overflow. [The glass guide](../../../docs/liquid-glass.md) describes
-native/shared surfaces and their composition limits.
+resizing and overflow. Early milestone introductions describe historical opaque
+work; [current glass guide](../../../docs/liquid-glass.md) supersedes that direction.
 
 ## Native and fallback surfaces
 
@@ -48,7 +49,7 @@ Read [composition/support](composition-support.md) before composing native comma
 | Need | Entry / selected required arguments and defaults | Owning guide |
 |---|---|---|
 | Action | [PushButton](../../../lib/src/buttons/push_button.dart): required `child`, `controlSize`; nullable `onPressed` disables. `MacosIconButton`, `MacosDisclosureButton`, `HelpButton` for icon/disclosure/help. | [Buttons](../../../docs/foundational-buttons.md) |
-| Boolean or choice | [MacosCheckbox](../../../lib/src/buttons/checkbox.dart): required `bool value`, nullable `ValueChanged<bool>? onChanged`, `size=14`, optional `semanticLabel`. `MacosSwitch`, `MacosRadioButton`, `MacosSegmentedControl` for other controlled choices. | [Value controls](../../../docs/value-controls.md) |
+| Boolean or choice | [MacosCheckbox](../../../lib/src/buttons/checkbox.dart): required `bool value`, nullable `ValueChanged<bool>? onChanged`, `size=14`, optional `semanticLabel`. `MacosSwitch`, `MacosRadioButton`, `MacosSegmentedControl` for other controlled choices. Segments use `MacosTabController`, not native momentary/multiple-selection items; use `MacosTabView` for principal child views. | [Value controls](../../../docs/value-controls.md) |
 | Text and search | [MacosSearchField](../../../lib/src/fields/search_field.dart): no required args; `maxResultsToShow=5`, `placeholder='Search'`, `enabled=true`; optional controller/focus, `ValueChanged<String>? onChanged/onSubmitted`, `List<SearchResultItem>? results`, `Function(SearchResultItem)? onResultSelected`. `SearchResultItem(String searchKey, {Widget? child, VoidCallback? onSelected})`. Use `MacosTextField` for general editing. | [Fields](../../../docs/text-fields.md): result selection fires item/field selection callbacks once each, **not onChanged**. Preserve IME composing value and caller resource ownership. |
 | Range/progress/selectors | `MacosSlider`, `ProgressBar`, `ProgressCircle`, `MacosColorWell`, `MacosDatePicker`, `MacosTimePicker`. Date/time initial values are seeds, not controlled properties. | [Selectors](../../../docs/sliders-progress-selectors.md); inspect constructors for selected control. |
 | Flat text records | [MacosDataTable](../../../lib/src/layout/data_table.dart): required `columns`, `rows`, `ValueChanged<Object> onSelectionChanged`; optional `Object? selectedId`, `int? sortColumnIndex`, `sortAscending=true`, `void Function(int,bool)? onSort`, `onActivate`, `onSecondaryTap`. `MacosTableColumn` requires `String label`, `double width`, `sortable=false`; `MacosTableRow` requires `Object id`, `List<String> cells`, `enabled=true`. | [Table](../../../docs/data-table.md): 0–200 rows, stable unique IDs, matching cell counts, finite viewport. App sorts/rebuilds and retains selection; not editable/multiselect/native grid. |
@@ -62,3 +63,19 @@ equal proposals and controlled rebuilds; no final release callback or automatic
 rollback. RelevanceIndicator is deprecated compatibility-only. Before migrating,
 read [intentional repairs and restored defaults](../../../docs/migration.md).
 Unexpanded family rows are routing aids, **not constructor or compilation claims**.
+
+Typed native toolbar additions: `MacosNativeToolbar.items` accepts public
+`MacosNativeToolbarCommandItem(command: ..., placement: ...)` and
+`MacosNativeToolbarSearch(id: ..., label: ..., controller: ..., onChanged: ...)`;
+`MacosNativeToolbarPlacement` is leading/content/trailing. `commands` must be empty
+when typed items are supplied. Optional `MacosNativeToolbarController.focusSearch`
+routes native Find; app focuses fallback on false. Full ownership and editing
+limits: [contract](../../../docs/native-window-toolbar.md#typed-items-and-controlled-native-search).
+
+
+pane coordination exports `MacosPaneLayoutController`/`MacosPaneLayout` for an opt-in one-window
+shell geometry feed and `MacosNativeToolbarGroup`/`MacosNativeToolbarGroupMode` for
+standard native momentary or controlled exclusive options. Existing Flutter
+segments retain their MacosTabController contract. See [coordination/actions](../../../docs/native-window-toolbar.md#coordinated-panes-and-grouped-actions)
+and the public-import standalone example for constructor use and fallback/menu
+parity. Exclusive selectedId is required; null is required for momentary mode.

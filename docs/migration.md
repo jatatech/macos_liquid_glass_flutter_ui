@@ -41,3 +41,55 @@ macOS 12 deployment floor is not runtime certification. Deprecated relevance
 remains compatibility-only. Use the [developer guide](developer-guide.md),
 [gallery](../example/README.md) and [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md)
 for complete public-import examples.
+
+## Native window toolbar, search and panes
+
+These are additive APIs; existing floating glass and shorthand command consumers
+keep their constructors and callback contracts. Use
+[MacosNativeToolbar](native-window-toolbar.md) for native window chrome.
+
+- Typed `items` must not be mixed with nonempty `commands`. Retain stable IDs and
+  semantic placements across rebuilds. Missing native transport uses your Flutter fallback.
+- `MacosNativeToolbarSearch` uses a caller-owned query controller. AppKit owns native
+  selection and marked text; echoing a query must not reset editing. Supply equivalent
+  Flutter fallback controls and app-owned Find/Edit menu routing.
+- Share a caller-owned `MacosPaneLayoutController` with `MacosWindow` and the toolbar
+  to coordinate panes. Use `Sidebar.topOffset: 0` for the native-reserved viewport;
+  borrow each builder's scroll controller once. Defaults stay unchanged without opt-in.
+- Native groups support momentary commands or controlled exclusive selection.
+  Exclusive groups require a valid `selectedId`; momentary groups require null.
+  Each activation proposes once, including repeated choices.
+- Retain a `MacosNativeToolbarAnchor` for contextual dates. The staged Gregorian
+  adapter returns a draft on automatic closure; apply only explicit commits.
+  Reveal the labelled Flutter chooser when the native anchor is unavailable.
+
+Keep one toolbar owner above route changes. Disposing it restores temporary window
+properties only while ownership matches; later external writes are preserved.
+A rejected update removes the previously accepted native toolbar before Flutter
+fallback appears. Valid recovery retains caller-owned query and application state.
+The standalone example's native Edit menu bootstrap belongs to that example,
+not to a new package-level application-menu API.
+
+## Semantic colors
+
+Resolved dynamic-color wrappers retain their type, variants and equality contract;
+all Color operations now use the resolved appearance, including alpha and color
+space. Remove RGB-reconstruction workarounds and resolve again after trait changes.
+Sidebar selection/hover/press and toolbar overflow now use contrasting foregrounds;
+explicit child styles still win. [Color contract](semantic-colors.md).
+
+## Direction and localized dates
+
+`MacosWindow.sidebar` is leading and `endSidebar` trailing. Scaffold children and
+sidebar tree keys follow reading direction; `ResizableSide` remains physical.
+`MacosPaneLayout.textDirection` defaults to LTR for direct construction.
+Five optional date action labels retain English defaults. Explicit week-start false
+forces Sunday; null follows delegates. Legacy seed, browse and reset callbacks
+remain. Flutter direction does not configure AppKit's application language.
+[Locale policy](localization.md).
+
+## Examples and documentation
+
+[Fieldnotes](examples.md) adds an offline photography workspace without changing
+package APIs. Its favourites and notes are session state. Existing component
+examples and upstream continuous drag/fractional value contracts are retained.

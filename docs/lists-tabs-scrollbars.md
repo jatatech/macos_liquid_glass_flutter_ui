@@ -1,9 +1,7 @@
 # Lists, tabs and scrollbars
 
-Lists, tabs and scrollbars provide readable opaque document content, retained
-state and controlled keyboard/pointer behavior. The gallery uses the
-[bounded table](data-table.md) for aligned document metadata; these list/tab/scroll
-contracts remain available independently.
+Dense document content uses readable opaque Flutter surfaces alongside [native glass](liquid-glass.md) under ADRs 0004/0005. Existing
+native window ownership and dependencies are unchanged.
 
 ## Public use and behaviour
 
@@ -78,7 +76,9 @@ scrollable viewport and scaled row extents; full document names remain in text
 semantics even when narrow visual labels use ellipsis. It is representative
 component coverage, not a production file manager or performance benchmark.
 
-The list properties are additive. Existing clients should review the
+No imports, exports, dependencies or native APIs are changed. The three list
+properties are additive; the [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md) covers current usage. The immutable
+upstream inventory remains historical. Existing clients should review the
 intentional behaviour corrections: interactive list rows enter keyboard
 traversal; hidden tab pages cannot retain focus; tab strips reserve layout space;
 partial scrollbar themes inherit defaults; high contrast overrides thumb colour.

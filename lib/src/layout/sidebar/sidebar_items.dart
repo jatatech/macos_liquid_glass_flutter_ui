@@ -180,6 +180,13 @@ class _SidebarItemsState extends State<_SidebarItemsView> {
     if (index < 0) return KeyEventResult.ignored;
     final entry = visible[index];
     final key = event.logicalKey;
+    final rtl = Directionality.of(context) == TextDirection.rtl;
+    final expandKey = rtl
+        ? LogicalKeyboardKey.arrowLeft
+        : LogicalKeyboardKey.arrowRight;
+    final collapseKey = rtl
+        ? LogicalKeyboardKey.arrowRight
+        : LogicalKeyboardKey.arrowLeft;
     if (key == LogicalKeyboardKey.arrowDown) {
       _focus(visible[(index + 1).clamp(0, visible.length - 1)]);
     } else if (key == LogicalKeyboardKey.arrowUp) {
@@ -188,7 +195,7 @@ class _SidebarItemsState extends State<_SidebarItemsView> {
       _focus(visible.first);
     } else if (key == LogicalKeyboardKey.end) {
       _focus(visible.last);
-    } else if (key == LogicalKeyboardKey.arrowRight) {
+    } else if (key == expandKey) {
       if (entry.item.disclosureItems != null) {
         if (!_isExpanded(entry)) {
           _toggle(entry);
@@ -197,7 +204,7 @@ class _SidebarItemsState extends State<_SidebarItemsView> {
           _focus(visible[index + 1]);
         }
       }
-    } else if (key == LogicalKeyboardKey.arrowLeft) {
+    } else if (key == collapseKey) {
       if (entry.item.disclosureItems != null && _isExpanded(entry)) {
         _toggle(entry);
       } else if (entry.parent != null) {
@@ -294,14 +301,16 @@ class _SidebarItemsState extends State<_SidebarItemsView> {
                     offstage: reduceMotion ? !expanded : value == 0,
                     child: ClipRect(
                       child: Align(
-                        alignment: Alignment.centerLeft,
+                        alignment: AlignmentDirectional.centerStart,
                         heightFactor: reduceMotion ? (expanded ? 1 : 0) : value,
                         child: child,
                       ),
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: MacosChromeData.gap),
+                    padding: const EdgeInsetsDirectional.only(
+                      start: MacosChromeData.gap,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: _entries
@@ -439,7 +448,7 @@ class _SidebarHeaderItem extends StatelessWidget {
           children: [
             if (hasLeading)
               Padding(
-                padding: EdgeInsets.only(right: spacing),
+                padding: EdgeInsetsDirectional.only(end: spacing),
                 child: MacosIconTheme.merge(
                   data: MacosIconThemeData(
                     color: theme.primaryColor,
@@ -509,7 +518,7 @@ class _SidebarItemState extends State<_SidebarItem> {
 
   DefaultTextStyle _buildLabelWithDefaultTextStyle(
     TextStyle labelStyle,
-    Color selectedColor,
+    Color? foreground,
     BuildContext context,
   ) {
     if (item.section == true) {
@@ -526,7 +535,7 @@ class _SidebarItemState extends State<_SidebarItem> {
 
     return DefaultTextStyle(
       style: labelStyle.copyWith(
-        color: selected ? textLuminance(selectedColor) : null,
+        color: foreground,
         overflow: TextOverflow.ellipsis,
       ),
       child: item.label,
@@ -556,12 +565,25 @@ class _SidebarItemState extends State<_SidebarItem> {
           _SidebarItemsConfiguration.of(context).selectedColor,
       context,
     );
-    final textBackground = _pressed ? chrome.pressed : selectedColor;
     final unselectedColor = MacosDynamicColor.resolve(
       item.unselectedColor ??
           _SidebarItemsConfiguration.of(context).unselectedColor,
       context,
     );
+
+    final background = _pressed
+        ? chrome.pressed
+        : selected
+        ? selectedColor
+        : _hover
+        ? chrome.hover
+        : unselectedColor;
+    final foreground = selected || _pressed || _hover
+        ? selectionForeground(
+            background,
+            MacosDynamicColor.resolve(chrome.sidebar, context),
+          )
+        : null;
 
     final double spacing = 10.0 + theme.visualDensity.horizontal;
     final itemSize = _SidebarItemsConfiguration.of(context).itemSize;
@@ -613,13 +635,7 @@ class _SidebarItemState extends State<_SidebarItem> {
                 minHeight: itemSize.height + theme.visualDensity.vertical,
               ),
               decoration: ShapeDecoration(
-                color: _pressed
-                    ? chrome.pressed
-                    : selected
-                    ? selectedColor
-                    : _hover
-                    ? chrome.hover
-                    : unselectedColor,
+                color: background,
                 shape: _focus
                     ? RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
@@ -639,50 +655,55 @@ class _SidebarItemState extends State<_SidebarItem> {
                 vertical: 7 + theme.visualDensity.horizontal,
                 horizontal: spacing,
               ),
-              child: Row(
-                children: [
-                  if (widget.expanded != null)
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        right: MacosChromeData.gap / 2,
-                      ),
-                      child: Icon(
-                        widget.expanded!
-                            ? CupertinoIcons.chevron_down
-                            : CupertinoIcons.chevron_right,
-                        size: itemSize.iconSize,
-                        color: chrome.secondaryForeground,
-                      ),
-                    ),
-                  if (hasLeading)
-                    Padding(
-                      padding: EdgeInsets.only(right: spacing),
-                      child: MacosIconTheme.merge(
-                        data: MacosIconThemeData(
-                          color: selected
-                              ? textLuminance(textBackground)
-                              : theme.primaryColor,
-                          size: itemSize.iconSize,
-                        ),
-                        child: item.leading!,
-                      ),
-                    ),
-                  Expanded(
-                    child: _buildLabelWithDefaultTextStyle(
-                      labelStyle,
-                      textBackground,
-                      context,
-                    ),
+              child: IconTheme.merge(
+                data: IconThemeData(
+                  color: foreground ?? theme.primaryColor,
+                  size: itemSize.iconSize,
+                ),
+                child: MacosIconTheme.merge(
+                  data: MacosIconThemeData(
+                    color: foreground ?? theme.primaryColor,
+                    size: itemSize.iconSize,
                   ),
-                  if (hasTrailing) ...[
-                    DefaultTextStyle(
-                      style: labelStyle.copyWith(
-                        color: selected ? textLuminance(textBackground) : null,
+                  child: Row(
+                    children: [
+                      if (widget.expanded != null)
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(
+                            end: MacosChromeData.gap / 2,
+                          ),
+                          child: Icon(
+                            widget.expanded!
+                                ? CupertinoIcons.chevron_down
+                                : Directionality.of(context) ==
+                                      TextDirection.rtl
+                                ? CupertinoIcons.chevron_left
+                                : CupertinoIcons.chevron_right,
+                            size: itemSize.iconSize,
+                            color: foreground ?? chrome.secondaryForeground,
+                          ),
+                        ),
+                      if (hasLeading)
+                        Padding(
+                          padding: EdgeInsetsDirectional.only(end: spacing),
+                          child: item.leading!,
+                        ),
+                      Expanded(
+                        child: _buildLabelWithDefaultTextStyle(
+                          labelStyle,
+                          foreground,
+                          context,
+                        ),
                       ),
-                      child: item.trailing!,
-                    ),
-                  ],
-                ],
+                      if (hasTrailing) ...[
+                        DefaultTextStyle(
+                          style: labelStyle.copyWith(color: foreground),
+                          child: item.trailing!,
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
               ),
             ),
           ),

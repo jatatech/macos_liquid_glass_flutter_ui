@@ -1,6 +1,6 @@
 # Support and known limitations
 
-Version **0.9.0-dev.1**, 2026-11-08. Usable pre-release with provisional support;
+Version **0.9.0-dev.1**, 2026-11-09. Usable pre-release with provisional support;
 not a full accessibility, runtime or performance certification.
 
 ## Declared and observed scope
@@ -16,7 +16,10 @@ not a full accessibility, runtime or performance certification.
 | Deployment | macOS 12.0 build floor; native NSGlassEffectView requires 26+, interactive feedback guarded at 27. Older runtime execution is unverified. |
 | Other platforms | Flutter approximation/policy simulations exist. Windows/Linux/mobile/web builds and runtimes are not certified; native dependencies may limit portability. |
 
-Native hosting supports one registrar/window and one to four concise commands.
+Floating native hosting supports one registrar/window and one to four concise commands.
+The separate [native window toolbar](native-window-toolbar.md) supports up to
+20 typed items, controlled search, native groups, pane coordination and staged
+Gregorian dates. It retains one toolbar owner and has no Flutter approximation mode.
 It replaces equivalent Flutter controls; it does not host arbitrary Flutter
 children. Translation/visibility/custom overlay limits are part of the
 [glass contract](liquid-glass.md). Dense content remains opaque and readable.
@@ -56,11 +59,21 @@ coalescing, hide/occlusion, invalidation and disposal. Those tests establish wir
 ordering, not a guarantee against transport stalls: an already dispatched native
 call must finish before a pending hide/removal can be sent.
 
-## Public export verification
+## Current checkpoint verification
 
-The standalone public tree passed analysis, all 353 library tests, all 28 gallery/
-consumer tests, non-mutating formatting of 181 Dart files and a macOS Debug build
-on the recorded main environment before initial publication. Native source, public
-examples, tests and MIT licence retain their implementation bytes. Documentation
-and distribution metadata are projected for consumers. No new manual/native
-runtime acceptance follows from this packaging verification.
+The initial public tree passed 353 library and 28 gallery tests, analysis,
+formatting and a macOS Debug build before publication. The current checkpoint
+adds native window-toolbar/search/pane/date and localization improvements, plus
+Fieldnotes with bundled photography. Current export checks are recorded below;
+these do not close outstanding operator or alternative-environment acceptance.
+
+On 9 November 2026, the independently exported current checkpoint passed clean
+analysis, **396 library tests and 42 example tests**, non-mutating formatting of
+200 Dart files, and a macOS arm64 Debug build of `lib/showcase.dart` using the
+main verification environment above. The two new showcase tests cover search
+empty/recovery, filtered viewer navigation/Back, favourites and a constrained
+200% text layout. Native Fieldnotes browsing/search, selection-following
+inspection, photo navigation, favourite changes and light/dark appearance were
+observed and recorded. Full operator/environment acceptance remains open.
+The existing SwiftPM manifest advisory and always-run build-script warning remain;
+the exported Debug build succeeds with those advisories.

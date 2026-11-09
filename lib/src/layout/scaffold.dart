@@ -134,7 +134,10 @@ class _ScaffoldBody extends MultiChildRenderObjectWidget {
     final index = children.indexWhere(
       (e) => e.key == const Key('macos_scaffold_content_area'),
     );
-    return _RenderScaffoldBody(contentAreaIndex: index > -1 ? index : null);
+    return _RenderScaffoldBody(
+      contentAreaIndex: index > -1 ? index : null,
+      textDirection: Directionality.of(context),
+    );
   }
 
   @override
@@ -146,6 +149,7 @@ class _ScaffoldBody extends MultiChildRenderObjectWidget {
       (e) => e.key == const Key('macos_scaffold_content_area'),
     );
     renderObject.contentAreaIndex = index > -1 ? index : null;
+    renderObject.textDirection = Directionality.of(context);
   }
 }
 
@@ -161,11 +165,18 @@ class _RenderScaffoldBody extends RenderBox
   _RenderScaffoldBody({
     List<RenderBox> children = const <RenderBox>[],
     this.contentAreaIndex,
-  }) {
+    required TextDirection textDirection,
+  }) : _textDirection = textDirection {
     addAll(children);
   }
 
   int? contentAreaIndex;
+  TextDirection _textDirection;
+  set textDirection(TextDirection value) {
+    if (_textDirection == value) return;
+    _textDirection = value;
+    markNeedsLayout();
+  }
 
   @override
   void setupParentData(RenderBox child) {
@@ -222,7 +233,12 @@ class _RenderScaffoldBody extends RenderBox
         width +=
             (childParentData.previousSibling?.parentData as _ParentData).width;
       }
-      childParentData.offset = Offset(width, 0);
+      childParentData.offset = Offset(
+        _textDirection == TextDirection.rtl
+            ? fullWidth - width - childSize.width
+            : width,
+        0,
+      );
       childParentData.index = childCount;
       childCount++;
       child = childParentData.nextSibling;

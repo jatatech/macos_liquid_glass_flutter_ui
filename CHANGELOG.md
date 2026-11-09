@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.9.0-dev.1 — checkpoint update, 2026-11-09
+
+- Native window toolbar with typed search, semantic item placement, momentary and
+  exclusive groups, coordinated panes and bounded anchored date tasks.
+- Guarded window restoration, adaptive group labels and teardown before rejected
+  updates expose fallback; example native Edit menus retain responder routing.
+- Resolved semantic color/selection repairs and directional shell/date-label policy.
+- Runnable Fieldnotes photography workspace with licensed bundled images,
+  albums, native search, favourites, field notes and floating glass photo controls.
+- Concise README, animated app demonstrations and focused consumer guides.
+
+The package version remains a pre-release; support gaps remain explicit.
+
 ## 0.9.0-dev.1 — 2026-11-08
 
 Initial public pre-release of this fork, retaining the `macos_ui` import and

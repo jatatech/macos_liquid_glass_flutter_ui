@@ -1,14 +1,17 @@
 # Value controls
 
-`MacosSwitch`, `MacosCheckbox`, `MacosRadioButton` and `MacosSegmentedControl`
-provide controlled state and semantic Flutter styling. Existing native window
-utilities and the accessibility bridge retain their ownership.
+`MacosSwitch`, `MacosCheckbox`, `MacosRadioButton` and
+`MacosSegmentedControl` render opaque Flutter controls alongside [native glass surfaces](liquid-glass.md). Native
+window utilities, traffic lights and the accessibility preference bridge retain
+their existing ownership. These controls add no native glass or channels.
 
 ## Usage and state ownership
 
 Import `package:macos_ui/macos_ui.dart`. The gallery's Value controls page uses
 this public import for document sync in all three switch sizes, mixed attachment
-selection, enabled/disabled storage choices and document-view segments.
+selection, enabled/disabled storage choices and preview-detail choices. Principal child-view switching uses `MacosTabView`;
+see [task recipes](composition-recipes.md). The existing controller-backed
+`MacosSegmentedControl` is not a native momentary-action or multi-select API.
 
 ```dart
 MacosSwitch(
@@ -22,11 +25,11 @@ MacosCheckbox(
   onChanged: (value) => setState(() => includeAttachments = value),
 )
 MacosSegmentedControl(
-  controller: viewController, // MacosTabController(length: 3)
+  controller: detailController, // MacosTabController(length: 3)
   tabs: const [
-    MacosTab(label: 'All documents'),
-    MacosTab(label: 'Recent'),
-    MacosTab(label: 'Shared with me'),
+    MacosTab(label: 'Summary'),
+    MacosTab(label: 'Standard'),
+    MacosTab(label: 'Detailed'),
   ],
 )
 ```
@@ -88,9 +91,10 @@ A declined drag request returns the knob to the controlled value.
 ## Styling and compatibility
 
 Public constructors, exports, callback types, control sizes, diagnostics and the
-public knob painter remain.
+public knob painter remain. No new public package API or consumer skill is added.
 MIT attribution and the pinned historical inventory remain intact. The new
-interaction, surface and radio-client helpers are internal.  Gallery compilation verifies the public examples'
+interaction, surface and radio-client helpers are internal. No consumer-skill
+references exist to migrate. Gallery compilation verifies the public examples'
 constructors, including Flutter `RadioGroup` on the recorded SDK.
 
 Behaviour/visual migrations:

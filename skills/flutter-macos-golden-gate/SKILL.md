@@ -5,10 +5,23 @@ description: Build or repair macOS Flutter consumers of this repository's local 
 
 # Flutter macOS Golden Gate
 
-Use the consumer's actual dependency source. This is `macos_ui` 0.9.0-dev.1,
-a fork with its own pre-1.0 sequence; registry upstream releases lack its additions.
-Inspect pubspec/lock/package configuration and resolved public source. Do not
-substitute a registry dependency for this Git or local path dependency.
+Use the consumer's actual dependency source. This repository is a fork named
+`macos_ui`, now pre-release **0.9.0-dev.1**; the former **2.2.3** metadata
+was inherited upstream identity. This fork uses its own pre-1.0 sequence; registry
+upstream releases do not include its additions. Inspect the consumer's
+pubspec/lock/package configuration and the resolved `lib/macos_ui.dart` before generating code. Compare this dictionary with the resolved public source revision.
+Do not substitute a registry dependency for the user's local checkout.
+
+Before selecting widgets, read [task/composition recipes](../../docs/composition-recipes.md).
+Write the consumer's task contract: navigation destination versus object selection,
+search scope, title/command subject, persistence and presentation lifetime. Review
+roles and ownership as well as compilation. Retain query/selection on Back;
+previous/next traverses results rather than replacing navigation history. The
+capability ledger records implemented typed search, pane coordination, groups and
+bounded native anchors/staged dates, with native/fallback and operator limits.
+Use MacosTabView for principal content switching; controller-backed segments are
+related choices, not momentary native actions. Use one retained native toolbar
+owner and app-owned PlatformMenuBar routing with shared callbacks/enabled state.
 
 Read the relevant part of [the versioned API dictionary](references/api-v1.md)
 for names, constructor requirements, callbacks and component selection. It links
@@ -47,5 +60,44 @@ focus and semantics, text scaling and constrained layout for the changed flow.
 For native claims, use actual supported runtime evidence; widget simulation is
 not native acceptance. Report exact versions/scope and unavailable environments.
 [Support policy](../../docs/architecture/compatibility-policy.md) and
-[verification guidance](../../CONTRIBUTING.md) retain unresolved gates; do not infer
+[release checklist](../../CONTRIBUTING.md) retain unresolved gates; do not infer
 minimum/current stable, cross-platform, fidelity or performance certification.
+
+## Actual native window toolbars
+
+For a top-frame toolbar with icons, groups and overflow, use the additive
+`MacosNativeToolbar` API after reading [its contract](../../docs/native-window-toolbar.md)
+and public-import example. The floating four-command surface is not a full
+window toolbar. Follow the documented window configuration and single-owner scope.
+For a full-width native glass titlebar, use the additive `glassTitlebar: true`
+mode after window-utils initialisation; preserve that dependency’s native parent
+controller. Native command pills alone do not establish titlebar translucency.
+
+## Resolved selection colors
+
+Read [semantic colors](../../docs/semantic-colors.md) when styling selection or
+translucent chrome. Resolve dynamic colors from the current build context; retain
+live brightness/contrast/elevation dependencies. Do not rebuild RGB to work around
+the former serialization defect. Sidebar text, disclosure and both `Icon` and
+`MacosIcon` inherit contrasting state defaults; explicit colors and custom drawing
+remain the consumer's responsibility. Transparent selection assumes the semantic
+canvas underlay. Native material contrast still requires actual runtime evidence.
+
+For native search use the public `MacosNativeToolbarSearch` descriptor and semantic
+`MacosNativeToolbarCommandItem` roles under the existing single owner. Read the
+[native search contract](../../docs/native-window-toolbar.md#typed-items-and-controlled-native-search)
+for controller ownership, IME/query boundaries, fallback and app-owned Find/menu
+routing. Roles order items; optional shared pane geometry bounds native title width, without exact divider alignment. Use the compiling standalone
+example; physical IME/VoiceOver and older-runtime acceptance remain open.
+
+
+For coordinated panes use `MacosPaneLayoutController` with both MacosWindow and its
+retained native toolbar, Sidebar.topOffset zero and borrowed pane controllers.
+Read the [coordination/group contract](../../docs/native-window-toolbar.md#coordinated-panes-and-grouped-actions)
+before opting in: one opaque Flutter sidebar backing, immediate visibility changes,
+automatic scrollbar suppression and a 300-point content floor. Content scrollers
+need their own explicit thumb; never wrap Sidebar's builder in another scrollbar.
+Native toolbar groups use `MacosNativeToolbarGroup`: momentary has null selectedId;
+exclusive requires an app-controlled selectedId. Reuse option callbacks across
+fallback/menu/shortcuts and preserve repeats, disabled state and cancellation.
+This does not change MacosSegmentedControl or promise a native floating sidebar.

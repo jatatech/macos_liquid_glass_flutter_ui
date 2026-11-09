@@ -1,4 +1,19 @@
-# Production gallery
+# Runnable examples
+
+Start with [Fieldnotes](../docs/examples.md):
+
+```sh
+flutter run -d macos -t lib/showcase.dart
+```
+
+Its bundled photography, albums, search, favourites and notes form a complete
+local-session workspace. [Photo licensing](assets/fieldnotes/SOURCES.md).
+
+For focused native toolbar/search/panes/dates use
+`flutter run -d macos -t lib/native_toolbar_example.dart`.
+For locale wiring use `flutter run -d macos -t lib/localization_example.dart`.
+
+## Production gallery
 
 Library version **0.9.0-dev.1**, gallery app `0.9.0+1`. See
 [support and known limitations](../docs/support.md) for tested scope and open acceptance.

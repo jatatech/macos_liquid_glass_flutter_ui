@@ -1,3 +1,5 @@
+import 'dart:ui' show ColorSpace;
+
 import 'package:flutter/foundation.dart';
 import 'package:macos_ui/macos_ui.dart';
 import 'package:macos_ui/src/library.dart';
@@ -36,6 +38,20 @@ bool debugCheckHasMacosTheme(BuildContext context, [bool check = true]) {
 
 Color textLuminance(Color backgroundColor) {
   return backgroundColor.computeLuminance() >= 0.5
+      ? CupertinoColors.black
+      : CupertinoColors.white;
+}
+
+/// Chooses the higher-contrast opaque foreground against a resolved fill.
+/// Translucent fills are evaluated over the owning semantic surface.
+Color selectionForeground(Color fill, Color surface) {
+  final luminance = Color.alphaBlend(
+    fill.withValues(colorSpace: ColorSpace.sRGB),
+    surface.withValues(colorSpace: ColorSpace.sRGB),
+  ).computeLuminance();
+  final blackContrast = (luminance + 0.05) / 0.05;
+  final whiteContrast = 1.05 / (luminance + 0.05);
+  return blackContrast >= whiteContrast
       ? CupertinoColors.black
       : CupertinoColors.white;
 }

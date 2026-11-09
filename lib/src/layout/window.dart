@@ -13,7 +13,7 @@ import 'package:macos_window_utils/widgets/transparent_macos_sidebar.dart';
 /// secondary content (like navigation buttons). If no [sidebar] is specified,
 /// only the [child] will be shown.
 class MacosWindow extends StatefulWidget {
-  /// Creates a macOS window layout with a sidebar on the left.
+  /// Creates a macOS window layout with a sidebar at the logical leading edge.
   ///
   /// The [child] widget is typically a [MacosScaffold] which fills the
   /// rest of the screen.
@@ -25,6 +25,7 @@ class MacosWindow extends StatefulWidget {
     this.backgroundColor,
     this.endSidebar,
     this.disableWallpaperTinting = false,
+    this.paneLayoutController,
     this.sidebarState = NSVisualEffectViewState.followsWindowActiveState,
   });
 
@@ -39,10 +40,10 @@ class MacosWindow extends StatefulWidget {
   /// An app bar to display at the top of the window.
   final TitleBar? titleBar;
 
-  /// A sidebar to display at the left of the window.
+  /// A sidebar to display at the logical leading edge of the window.
   final Sidebar? sidebar;
 
-  /// A sidebar to display at the right of the window.
+  /// A sidebar to display at the logical trailing edge of the window.
   final Sidebar? endSidebar;
 
   /// Whether wallpaper tinting should be disabled.
@@ -67,6 +68,14 @@ class MacosWindow extends StatefulWidget {
   /// this property may be used to disable wallpaper tinting outright.
   final bool disableWallpaperTinting;
 
+  /// Opt-in native-toolbar coordination. Disables automatic framework scrollbars
+  /// around the shell (its builders borrow the existing pane controllers), uses
+  /// one opaque Flutter sidebar backing instead of a competing legacy native
+  /// material, and reports visible geometry after layout. Set Sidebar.topOffset
+  /// to zero when the native toolbar already reserves the titlebar viewport.
+  /// Native Liquid Glass remains owned by MacosNativeToolbar, above this viewport.
+  final MacosPaneLayoutController? paneLayoutController;
+
   /// The state of the sidebar's [NSVisualEffectView].
   ///
   /// Possible values are:
@@ -86,6 +95,7 @@ class MacosWindow extends StatefulWidget {
 class _MacosWindowState extends State<MacosWindow> {
   var _sidebarScrollController = ScrollController();
   var _endSidebarScrollController = ScrollController();
+  int _layoutRevision = 0;
   double _sidebarWidth = 0.0;
   double _sidebarDragStartWidth = 0.0;
   double _sidebarDragStartPosition = 0.0;
@@ -169,6 +179,7 @@ class _MacosWindowState extends State<MacosWindow> {
 
   @override
   void dispose() {
+    _layoutRevision++;
     _sidebarScrollController.dispose();
     _endSidebarScrollController.dispose();
 
@@ -193,6 +204,20 @@ class _MacosWindowState extends State<MacosWindow> {
             (endSidebar.startWidth! <= endSidebar.maxWidth!),
       );
     }
+    final direction = Directionality.of(context);
+    final rtl = direction == TextDirection.rtl;
+    final dragSign = rtl ? -1.0 : 1.0;
+    SystemMouseCursor directionalCursor(SystemMouseCursor cursor) {
+      if (!rtl) return cursor;
+      if (cursor == SystemMouseCursors.resizeLeft) {
+        return SystemMouseCursors.resizeRight;
+      }
+      if (cursor == SystemMouseCursors.resizeRight) {
+        return SystemMouseCursors.resizeLeft;
+      }
+      return cursor;
+    }
+
     final MacosThemeData theme = MacosTheme.of(context);
     late Color backgroundColor = widget.backgroundColor ?? theme.canvasColor;
     late Color? sidebarBackgroundColor;
@@ -221,7 +246,7 @@ class _MacosWindowState extends State<MacosWindow> {
 
     const curve = Curves.linearToEaseOut;
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
-    final duration = reduceMotion
+    final duration = reduceMotion || widget.paneLayoutController != null
         ? Duration.zero
         : Duration(milliseconds: _sidebarSlideDuration);
 
@@ -232,14 +257,43 @@ class _MacosWindowState extends State<MacosWindow> {
         final isAtBreakpoint = width <= (sidebar?.windowBreakpoint ?? 0);
         final isAtEndBreakpoint = width <= (endSidebar?.windowBreakpoint ?? 0);
         final canShowSidebar =
-            _showSidebar && !isAtBreakpoint && sidebar != null;
+            _showSidebar &&
+            !isAtBreakpoint &&
+            sidebar != null &&
+            (widget.paneLayoutController == null ||
+                width - _sidebarWidth >= 300);
         final canShowEndSidebar =
-            _showEndSidebar && !isAtEndBreakpoint && endSidebar != null;
+            _showEndSidebar &&
+            !isAtEndBreakpoint &&
+            endSidebar != null &&
+            (widget.paneLayoutController == null ||
+                width -
+                        (canShowSidebar ? _sidebarWidth : 0) -
+                        _endSidebarWidth >=
+                    300);
         final visibleSidebarWidth = canShowSidebar ? _sidebarWidth : 0.0;
         final visibleEndSidebarWidth = canShowEndSidebar
             ? _endSidebarWidth
             : 0.0;
         final sidebarState = widget.sidebarState;
+        final controller = widget.paneLayoutController;
+        if (controller != null) {
+          final revision = ++_layoutRevision;
+          final layout = MacosPaneLayout(
+            size: Size(width, height),
+            leadingWidth: visibleSidebarWidth,
+            trailingWidth: visibleEndSidebarWidth,
+            textDirection: direction,
+          );
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted &&
+                revision == _layoutRevision &&
+                identical(controller, widget.paneLayoutController) &&
+                controller.value != layout) {
+              controller.value = layout;
+            }
+          });
+        }
 
         final layout = Stack(
           children: [
@@ -248,7 +302,8 @@ class _MacosWindowState extends State<MacosWindow> {
               curve: curve,
               duration: duration,
               height: height,
-              left: visibleSidebarWidth,
+              left: rtl ? null : visibleSidebarWidth,
+              right: rtl ? visibleSidebarWidth : null,
               width: width,
               child: ColoredBox(color: backgroundColor),
             ),
@@ -257,6 +312,8 @@ class _MacosWindowState extends State<MacosWindow> {
             if (sidebar != null)
               AnimatedPositioned(
                 key: sidebar.key,
+                left: rtl ? null : 0,
+                right: rtl ? 0 : null,
                 curve: curve,
                 duration: duration,
                 height: height,
@@ -335,7 +392,8 @@ class _MacosWindowState extends State<MacosWindow> {
                               ),
                             )
                           : _PlatformSidebar(
-                              native: isMac,
+                              native:
+                                  isMac && widget.paneLayoutController == null,
                               state: sidebarState,
                               child: DecoratedBox(
                                 decoration:
@@ -404,7 +462,8 @@ class _MacosWindowState extends State<MacosWindow> {
             AnimatedPositioned(
               curve: curve,
               duration: duration,
-              left: visibleSidebarWidth,
+              left: rtl ? null : visibleSidebarWidth,
+              right: rtl ? visibleSidebarWidth : null,
               width: width - visibleSidebarWidth - visibleEndSidebarWidth,
               height: height,
               child: ClipRect(
@@ -419,7 +478,8 @@ class _MacosWindowState extends State<MacosWindow> {
 
             // Title bar Area
             Positioned(
-              left: visibleSidebarWidth,
+              left: rtl ? null : visibleSidebarWidth,
+              right: rtl ? visibleSidebarWidth : null,
               width: width - visibleSidebarWidth,
               height: widget.titleBar?.height,
               child: ClipRect(
@@ -432,7 +492,8 @@ class _MacosWindowState extends State<MacosWindow> {
               AnimatedPositioned(
                 curve: curve,
                 duration: duration,
-                left: visibleSidebarWidth - 4,
+                left: rtl ? null : visibleSidebarWidth - 4,
+                right: rtl ? visibleSidebarWidth - 4 : null,
                 width: 7,
                 height: height,
                 child: Offstage(
@@ -447,8 +508,9 @@ class _MacosWindowState extends State<MacosWindow> {
                       setState(() {
                         var newWidth =
                             _sidebarDragStartWidth +
-                            details.globalPosition.dx -
-                            _sidebarDragStartPosition;
+                            dragSign *
+                                (details.globalPosition.dx -
+                                    _sidebarDragStartPosition);
 
                         if (sidebar!.startWidth != null &&
                             sidebar.snapToStartBuffer != null &&
@@ -478,7 +540,7 @@ class _MacosWindowState extends State<MacosWindow> {
                       });
                     },
                     child: MouseRegion(
-                      cursor: _sidebarCursor,
+                      cursor: directionalCursor(_sidebarCursor),
                       child: Align(
                         alignment: Alignment.center,
                         child: VerticalDivider(
@@ -496,7 +558,8 @@ class _MacosWindowState extends State<MacosWindow> {
             if (endSidebar != null)
               AnimatedPositioned(
                 key: endSidebar.key,
-                left: width - visibleEndSidebarWidth,
+                left: rtl ? null : width - visibleEndSidebarWidth,
+                right: rtl ? width - visibleEndSidebarWidth : null,
                 curve: curve,
                 duration: duration,
                 height: height,
@@ -568,7 +631,8 @@ class _MacosWindowState extends State<MacosWindow> {
               AnimatedPositioned(
                 curve: curve,
                 duration: duration,
-                right: visibleEndSidebarWidth - 4,
+                right: rtl ? null : visibleEndSidebarWidth - 4,
+                left: rtl ? visibleEndSidebarWidth - 4 : null,
                 width: 7,
                 height: height,
                 child: Offstage(
@@ -583,8 +647,9 @@ class _MacosWindowState extends State<MacosWindow> {
                       setState(() {
                         var newWidth =
                             _endSidebarDragStartWidth -
-                            details.globalPosition.dx +
-                            _endSidebarDragStartPosition;
+                            dragSign *
+                                (details.globalPosition.dx -
+                                    _endSidebarDragStartPosition);
 
                         if (endSidebar!.startWidth != null &&
                             endSidebar.snapToStartBuffer != null &&
@@ -614,7 +679,7 @@ class _MacosWindowState extends State<MacosWindow> {
                       });
                     },
                     child: MouseRegion(
-                      cursor: _endSidebarCursor,
+                      cursor: directionalCursor(_endSidebarCursor),
                       child: Align(
                         alignment: Alignment.center,
                         child: VerticalDivider(
@@ -650,7 +715,14 @@ class _MacosWindowState extends State<MacosWindow> {
               setState(() => _sidebarSlideDuration = 0);
             }
           },
-          child: layout,
+          child: controller == null
+              ? layout
+              : ScrollConfiguration(
+                  behavior: ScrollConfiguration.of(
+                    context,
+                  ).copyWith(scrollbars: false),
+                  child: layout,
+                ),
         );
       },
     );

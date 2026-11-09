@@ -74,7 +74,16 @@ class MacosDatePicker extends StatefulWidget {
     ],
     this.dateFormat,
     this.startWeekOnMonday,
+    this.previousMonthLabel = 'Previous month',
+    this.nextMonthLabel = 'Next month',
+    this.resetDateLabel = 'Reset date',
+    this.increaseFieldLabel = 'Increase selected field',
+    this.decreaseFieldLabel = 'Decrease selected field',
   });
+
+  /// App-owned translations; defaults retain the legacy English labels.
+  final String previousMonthLabel, nextMonthLabel, resetDateLabel;
+  final String increaseFieldLabel, decreaseFieldLabel;
 
   /// Whether the picker accepts input.
   final bool enabled;
@@ -116,7 +125,8 @@ class MacosDatePicker extends StatefulWidget {
   ///
   /// This is useful for internationalization purposes, as many countries begin their weeks on Mondays.
   ///
-  /// Defaults to `false`.
+  /// Null follows MaterialLocalizations.firstDayOfWeekIndex; true forces Monday,
+  /// false forces Sunday. The same origin drives both headers and day cells.
   final bool? startWeekOnMonday;
 
   @override
@@ -222,6 +232,13 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
     widget.onDateChanged.call(_formatAsDateTime());
   }
 
+  int _firstWeekday(MaterialLocalizations localizations) =>
+      widget.startWeekOnMonday == null
+      ? localizations.firstDayOfWeekIndex
+      : widget.startWeekOnMonday!
+      ? 1
+      : 0;
+
   // Creates the day headers - Su, Mo, Tu, We, Th, Fr, Sa
   // or Mo, Tu, We, Th, Fr, Sa, Su depending on the value of [startWeekOnMonday]
   List<Widget> _dayHeaders(
@@ -230,14 +247,7 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
   ) {
     final result = <Widget>[];
 
-    // Hack due to invalid "firstDayOfWeekIndex" implementation in MaterialLocalizations
-    // issue: https://github.com/flutter/flutter/issues/122274
-    // TODO: remove this workaround once the issue is fixed.
-    //  Then, "firstDayOfWeekIndex" can be controlled by passing "localizationsDelegates" and "supportedLocales" to MacosApp
-    int firstDayOfWeekIndex = localizations.firstDayOfWeekIndex;
-    if (widget.startWeekOnMonday == true) {
-      firstDayOfWeekIndex = 1;
-    }
+    final firstDayOfWeekIndex = _firstWeekday(localizations);
 
     for (int i = firstDayOfWeekIndex; result.length < 7; i = (i + 1) % 7) {
       final weekday = widget.weekdayAbbreviations[i];
@@ -347,6 +357,8 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
                 ),
                 child: Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
+                  // Numeric date formats retain their explicit token order in RTL.
+                  textDirection: TextDirection.ltr,
                   children: _textualDateElements(),
                 ),
               ),
@@ -362,7 +374,7 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
                   ignoring:
                       !_isMonthSelected && !_isDaySelected && !_isYearSelected,
                   child: ButtonInteraction(
-                    label: 'Increase selected field',
+                    label: widget.increaseFieldLabel,
                     onPressed: _incrementElement,
                     onHeldChanged: (_) {},
                     builder: (context, states) => PickerControlSurface(
@@ -398,7 +410,7 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
                   ignoring:
                       !_isMonthSelected && !_isDaySelected && !_isYearSelected,
                   child: ButtonInteraction(
-                    label: 'Decrease selected field',
+                    label: widget.decreaseFieldLabel,
                     onPressed: _decrementElement,
                     onHeldChanged: (_) {},
                     builder: (context, states) => PickerControlSurface(
@@ -442,8 +454,8 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 2.0,
+                padding: const EdgeInsetsDirectional.only(
+                  start: 2.0,
                   top: 2.0,
                   bottom: 4.0,
                 ),
@@ -464,9 +476,11 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         MacosIconButton(
-                          semanticLabel: 'Previous month',
+                          semanticLabel: widget.previousMonthLabel,
                           icon: MacosIcon(
-                            CupertinoIcons.arrowtriangle_left_fill,
+                            Directionality.of(context) == TextDirection.rtl
+                                ? CupertinoIcons.arrowtriangle_right_fill
+                                : CupertinoIcons.arrowtriangle_left_fill,
                             size: 10.0,
                             color: datePickerTheme.monthViewControlsColor,
                           ),
@@ -499,7 +513,7 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
                         ),
                         const SizedBox(width: 6.0),
                         MacosIconButton(
-                          semanticLabel: 'Reset date',
+                          semanticLabel: widget.resetDateLabel,
                           icon: MacosIcon(
                             CupertinoIcons.circle_fill,
                             size: 8.0,
@@ -523,9 +537,11 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
                         ),
                         const SizedBox(width: 6.0),
                         MacosIconButton(
-                          semanticLabel: 'Next month',
+                          semanticLabel: widget.nextMonthLabel,
                           icon: MacosIcon(
-                            CupertinoIcons.arrowtriangle_right_fill,
+                            Directionality.of(context) == TextDirection.rtl
+                                ? CupertinoIcons.arrowtriangle_left_fill
+                                : CupertinoIcons.arrowtriangle_right_fill,
                             size: 10.0,
                             color: datePickerTheme.monthViewControlsColor,
                           ),
@@ -617,11 +633,6 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
     );
     final localizations = MaterialLocalizations.of(context);
     final daysInMonth = DateUtils.getDaysInMonth(_selectedYear, _selectedMonth);
-    final dayOffset = DateUtils.firstDayOffset(
-      _selectedYear,
-      _selectedMonth,
-      localizations,
-    );
     final dayHeaders = _dayHeaders(
       MacosTheme.of(context).typography.caption1.copyWith(
         color: datePickerTheme.monthViewWeekdayHeaderColor,
@@ -631,15 +642,8 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
       localizations,
     );
 
-    // Hack due to invalid "firstDayOfWeekIndex" implementation in MaterialLocalizations
-    // issue: https://github.com/flutter/flutter/issues/122274
-    // TODO: remove this workaround once the issue is fixed.
-    //  Then, DateUtils.getDaysInMonth will work as expected when proper "localizationsDelegates" and "supportedLocales" are provided to MacosApp
-    int fixedDayOffset = dayOffset;
-    if (widget.startWeekOnMonday == true) {
-      fixedDayOffset =
-          (dayOffset - (1 - localizations.firstDayOfWeekIndex)) % 7;
-    }
+    final firstWeekday = DateTime(_selectedYear, _selectedMonth).weekday % 7;
+    final fixedDayOffset = (firstWeekday - _firstWeekday(localizations)) % 7;
 
     // 1-based day of month, e.g. 1-31 for January, and 1-29 for February on
     // a leap year.
@@ -715,9 +719,9 @@ class _MacosDatePickerState extends State<MacosDatePicker> {
               decoration: decoration,
               padding: const EdgeInsets.symmetric(vertical: 2.0),
               child: Align(
-                alignment: Alignment.centerRight,
+                alignment: AlignmentDirectional.centerEnd,
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 2.0),
+                  padding: const EdgeInsetsDirectional.only(end: 2.0),
                   child:
                       dayText ??
                       Text(

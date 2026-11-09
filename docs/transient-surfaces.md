@@ -1,11 +1,18 @@
 # Menus and transient surfaces
 
-Import `package:macos_ui/macos_ui.dart`. These Navigator-hosted Flutter surfaces
-provide opaque menus, dialogs, sheets and tooltips. `MacosSheet` is not an AppKit
-window-attached sheet. `ToolbarPopup` provides anchored content; there is no
-standalone native popover, context-menu or native menu-bar API. Existing utilities
-own window integration. See [glass overlay coordination](liquid-glass.md) when
-composing custom overlays with native controls.
+Import `package:macos_ui/macos_ui.dart`. Existing public constructors, exports,
+callbacks, route settings, Navigator selection, focus nodes and theme types remain
+available. The [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md) is available. The upstream inventory remains pinned;
+this document records local behaviour changes. The compiling example is
+`example/lib/transient_surfaces.dart`, reached through **Menus and dialogs**.
+
+These are Flutter surfaces inside a Navigator, with opaque default chrome.
+Current native glass composition follows [support and verification scope](../docs/support.md). `MacosSheet` is not an AppKit window-attached sheet. `ToolbarPopup`
+provides the existing anchored presentation; no standalone Popover or context-menu
+API is exported by this package. Secondary click does not invoke primary menu
+commands. No native menu bar, right-click menu, native glass, cross-window or
+new window-ownership contract is introduced. Existing utilities retain ownership
+of native titlebars, traffic lights and gestures.
 
 ## Commands and anchored content
 

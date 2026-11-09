@@ -1,15 +1,17 @@
 # Sliders, progress and selectors
 
-These controls use semantic Flutter surfaces. The colour well opens a
-package-owned AppKit colour panel. Existing macos_window_utils window ownership
-remains unchanged.
+These controls remain Flutter-rendered, with readable opaque content; [native glass](liquid-glass.md) is a separate functional layer under ADRs 0004/0005.
+Only the colour well opens native UI, through the package-owned AppKit colour
+panel. Existing `macos_window_utils` window ownership is unchanged.
 
 ## Public usage
 
 Import `package:macos_ui/macos_ui.dart`; time values additionally use
 `package:flutter/material.dart`'s `TimeOfDay` (as before). The gallery's
 **Sliders and selectors** page compiles a complete export-settings flow using
-only public imports. The contracts below describe current behavior.
+only public imports. The [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md) is available. The pinned upstream inventory
+remains historical; the additions and behaviour changes below are the local
+compatibility record.
 
 `MacosSlider(value: volume, min: 0, max: 100, onChanged: updateVolume,
 semanticLabel: 'Export volume')` is controlled: callers rebuild its value.
@@ -45,7 +47,7 @@ Menus use opaque surfaces, bounded scrolling and grow with text scaling; explici
 preserved. Hover/press/focus outlines use chrome roles; disabled rows dim.
 Reduced motion removes popup fading live. The bounded rapid-open/Escape test
 uses eight 16ms key cycles without the historical framework assertion on the
-pinned SDK; this is not a universal framework fix or a general framework claim.
+pinned SDK; this is not a universal framework fix or an M2 research claim.
 
 `MacosColorWell(onColorSelected: updateColour, color: colour,
 semanticLabel: 'Highlight colour')` adds optional controlled `color`, `enabled`

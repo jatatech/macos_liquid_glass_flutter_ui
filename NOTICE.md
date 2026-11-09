@@ -19,3 +19,8 @@ reference image. No Apple SDK headers are distributed as assets.
 The package/import is `macos_ui`; fork version is 0.9.0-dev.1. Upstream registry
 releases do not include these additions. This project does not imply Apple or
 upstream endorsement. Preserve this notice and the MIT licence when redistributing.
+
+## Showcase photography
+
+Bundled photographs use the [Unsplash License](https://unsplash.com/license),
+separately from the MIT code license. See [sources](example/assets/fieldnotes/SOURCES.md).

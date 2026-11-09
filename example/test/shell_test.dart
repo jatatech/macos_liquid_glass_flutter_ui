@@ -374,10 +374,10 @@ void main() {
       tester.widget<MacosCheckbox>(find.byType(MacosCheckbox).first).value,
       true,
     );
-    await tester.ensureVisible(find.text('Recent'));
-    await tester.tap(find.text('Recent'));
+    await tester.ensureVisible(find.text('Standard'));
+    await tester.tap(find.text('Standard'));
     await tester.pumpAndSettle();
-    expect(find.text('View 2 of 3'), findsOneWidget);
+    expect(find.text('Preview detail level: Standard'), findsOneWidget);
     tester.view.physicalSize = const Size(480, 640);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -385,7 +385,7 @@ void main() {
     tester.platformDispatcher.textScaleFactorTestValue = 2;
     addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('Shared with me'));
+    await tester.ensureVisible(find.text('Detailed'));
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
   });

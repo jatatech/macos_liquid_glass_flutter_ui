@@ -64,15 +64,21 @@ class _ToolbarOverflowMenuItemState extends State<ToolbarOverflowMenuItem> {
     final chrome = MacosChromeData.of(context);
     final highlighted =
         _enabled && (_hovered || _focused || widget.isSelected == true);
-    final background = _pressed
-        ? chrome.pressed
-        : highlighted
-        ? chrome.selection
-        : chrome.toolbar;
+    final background = MacosDynamicColor.resolve(
+      _pressed
+          ? chrome.pressed
+          : highlighted
+          ? chrome.selection
+          : chrome.toolbar,
+      context,
+    );
     final foreground = !_enabled
         ? chrome.disabledForeground
-        : highlighted
-        ? textLuminance(background)
+        : highlighted || _pressed
+        ? selectionForeground(
+            background,
+            MacosDynamicColor.resolve(chrome.toolbar, context),
+          )
         : chrome.foreground;
     Widget row = Semantics(
       button: true,
@@ -98,8 +104,10 @@ class _ToolbarOverflowMenuItemState extends State<ToolbarOverflowMenuItem> {
             behavior: HitTestBehavior.opaque,
             onTap: _enabled ? _activate : null,
             onTapDown: _enabled ? (_) => setState(() => _pressed = true) : null,
-            onTapUp: (_) => setState(() => _pressed = false),
-            onTapCancel: () => setState(() => _pressed = false),
+            onTapUp: _enabled ? (_) => setState(() => _pressed = false) : null,
+            onTapCancel: _enabled
+                ? () => setState(() => _pressed = false)
+                : null,
             child: Container(
               constraints: const BoxConstraints(minHeight: 28),
               padding: const EdgeInsets.symmetric(

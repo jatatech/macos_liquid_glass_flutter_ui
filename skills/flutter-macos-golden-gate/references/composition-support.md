@@ -5,8 +5,10 @@ native composition; it owns the detailed visibility rules. Native Liquid Glass
 uses public **NSGlassEffectView**, not NSVisualEffectView or captured Flutter
 pixels. The production gallery demonstrates a bounded native sibling composition
 over changing Flutter covers. Do not generalise that observation to every renderer
-or arbitrary Flutter content hosting. Native, approximation and opaque selection
-are implemented behaviors, with provisional runtime coverage described below.
+or arbitrary Flutter content hosting. [support and verification scope](../../../docs/support.md)
+and [support and verification scope](../../../docs/support.md)
+retain actual native glass plus distinct approximation/fallback, with mandatory
+native glass → native glass → native glass implementation and follow-up acceptance before release readiness.
 
 | Situation | Expected rendering / consumer action |
 |---|---|
@@ -49,7 +51,7 @@ AppDelegate/plugin registration. Native utility visual-effect materials are sepa
 
 | Symptom | Targeted check |
 |---|---|
-| New API missing or version looks like upstream | Inspect resolved path/barrel/source revision; local fork is now 0.9.0-dev.1. Older local snapshots inherited 2.2.3; registry upstream lacks these additions. |
+| New API missing or version looks like upstream | Inspect resolved path/barrel/source revision; fork is now 0.9.0-dev.1. Older local snapshots inherited 2.2.3; registry upstream lacks these additions. |
 | Shared surface never native | Check descriptor presence, supported runtime/SDK/plugin/preferences, visible bounded geometry and onRenderingChanged. An ordinary child intentionally uses approximation. Do not hide accessibility fallback. |
 | Glass overlays a custom popup | Coordinate nativeOccluded for its full visible lifetime, including non-interactive fade tails; remove overlay on owner disposal. |
 | Duplicate focus/action targets | Ensure fallback controls disappear from native mode; do not add another bridge or global shortcut. Check hidden owner, failed focus entry and resource ownership. |
@@ -60,7 +62,7 @@ AppDelegate/plugin registration. Native utility visual-effect materials are sepa
 ## What the recorded evidence establishes
 
 [Compatibility policy](../../../docs/architecture/compatibility-policy.md) owns
-the matrix; [CONTRIBUTING](../../../CONTRIBUTING.md) owns verification guidance.
+the matrix; [CONTRIBUTING](../../../CONTRIBUTING.md) owns the release checklist.
 Recorded primary: Flutter 3.44.4/ad70ec4617, Dart 3.12.2, engine a10d8ac38d;
 macOS 27.2/26B123 arm64, Xcode 27.2/27B52, SDK 27.2. Isolated Flutter
 3.41.6/db50e20168 / Dart 3.11.4 has scoped analysis/tests, not native runtime.
@@ -78,7 +80,21 @@ Open release gates: full VoiceOver/IME; actual live native transparency, contras
 motion, appearance/accent; complete traffic lights/minimise/close/restore; minimum
 and current stable SDK resolution/analysis/tests; macOS 26 and oldest intended
 fallback runtime; other hosts/Intel/universal/release; controlled frame/GPU/resource
-performance. Local AX inspection, MediaQuery previews, Flutter goldens and prior bounded mixed CPU smoke do not close them. No fidelity/performance equivalence or
+performance. Local AX inspection, MediaQuery previews, Flutter goldens and native glass's
+bounded mixed CPU smoke do not close them. No fidelity/performance equivalence or
 support certification follows from this skill. Keep native captures separate from
-deterministic Flutter goldens. See [support and known limitations](../../../docs/support.md) for remaining
-runtime and performance coverage.
+deterministic Flutter goldens. Read [support and verification scope](../../../docs/support.md)
+for exact observed limits, not a fresh broad renderer/calibration programme.
+
+Native toolbar disposal restores its previous window title/style/visibility as
+well as toolbar ownership; `windowTitle` is temporary. Later external writes or a
+replacement toolbar win. Hiding the toolbar or opting out of full-width glass does
+not dispose it. Retain one owner above routes; see the [precise lifecycle contract](../../../docs/native-window-toolbar.md#temporary-window-ownership).
+
+Use the [task recipes/capability ledger](../../../docs/composition-recipes.md) before choosing placements or presentation roles. Native toolbar integer groups retain ordering; opt-in typed items add semantic roles and controlled search, with optional shared pane geometry/title-width bounds and native momentary/exclusive groups; no exact divider alignment. Opaque stable native command anchors and a bounded staged Gregorian date task now have a [native/fallback contract](../../../docs/native-window-toolbar.md#stable-anchors-and-contextual-dates). Use labelled fallback when overflowed; preserve drafts on automatic closure and apply only explicit Jump. See the [native search contract](../../../docs/native-window-toolbar.md#typed-items-and-controlled-native-search).
+
+For RTL/localized tasks read [localization policy](../../../docs/localization.md).
+Shell panes/tree input follow Directionality; ResizableSide remains physical.
+Back/segments already mirror. Legacy dates retain English defaults and seed/browse
+callbacks; opt in with the documented locale adapter and real delegates. Native
+AppKit language/direction and the Gregorian staged fallback have separate limits.

@@ -624,15 +624,17 @@ class _ValueControlsPageState extends State<_ValueControlsPage> {
       MacosSegmentedControl(
         controller: _controller,
         tabs: const [
-          MacosTab(label: 'All documents'),
-          MacosTab(label: 'Recent'),
-          MacosTab(label: 'Shared with me'),
+          MacosTab(label: 'Summary'),
+          MacosTab(label: 'Standard'),
+          MacosTab(label: 'Detailed'),
         ],
       ),
       const SizedBox(height: MacosChromeData.gap),
       ListenableBuilder(
         listenable: _controller,
-        builder: (context, _) => Text('View ${_controller.index + 1} of 3'),
+        builder: (context, _) => Text(
+          'Preview detail level: ${['Summary', 'Standard', 'Detailed'][_controller.index]}',
+        ),
       ),
       Semantics(
         liveRegion: true,

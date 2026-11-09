@@ -45,6 +45,7 @@ export 'src/indicators/slider.dart';
 export 'src/labels/label.dart';
 export 'src/labels/tooltip.dart';
 export 'src/layout/content_area.dart';
+export 'src/layout/pane_layout.dart';
 export 'src/layout/macos_list_tile.dart';
 export 'src/layout/resizable_pane.dart';
 export 'src/layout/scaffold.dart';
@@ -101,3 +102,6 @@ export 'src/glass/surface.dart';
 export 'src/enums/glass_rendering.dart';
 
 export 'src/layout/data_table.dart';
+
+export 'src/glass/native_toolbar.dart';
+export 'src/glass/contextual_date.dart';

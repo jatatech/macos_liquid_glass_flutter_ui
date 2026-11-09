@@ -1,3 +1,5 @@
+import 'dart:ui' show ColorSpace;
+
 import 'package:flutter/cupertino.dart';
 
 import 'macos_theme.dart';
@@ -127,6 +129,9 @@ extension MacosDynamicColor on CupertinoDynamicColor {
   }
 }
 
+/// A resolved snapshot that retains all variants for subsequent resolution.
+/// Color operations delegate to [resolvedColor]; equality retains Cupertino's
+/// variant-sensitive contract rather than equating this wrapper to a plain Color.
 class ResolvedMacosDynamicColor extends CupertinoDynamicColor {
   const ResolvedMacosDynamicColor(
     this.resolvedColor,
@@ -151,6 +156,74 @@ class ResolvedMacosDynamicColor extends CupertinoDynamicColor {
       );
 
   final Color resolvedColor;
+
+  @override
+  double get a => resolvedColor.a;
+
+  @override
+  ColorSpace get colorSpace => resolvedColor.colorSpace;
+
+  @override
+  int toARGB32() => resolvedColor.toARGB32();
+
+  @override
+  double computeLuminance() => resolvedColor.computeLuminance();
+
+  @override
+  Color withValues({
+    double? alpha,
+    double? red,
+    double? green,
+    double? blue,
+    ColorSpace? colorSpace,
+  }) => resolvedColor.withValues(
+    alpha: alpha,
+    red: red,
+    green: green,
+    blue: blue,
+    colorSpace: colorSpace,
+  );
+
+  @override
+  Color withAlpha(int a) => resolvedColor.withAlpha(a);
+
+  @override
+  Color withRed(int r) => resolvedColor.withRed(r);
+
+  @override
+  Color withGreen(int g) => resolvedColor.withGreen(g);
+
+  @override
+  Color withBlue(int b) => resolvedColor.withBlue(b);
+
+  @Deprecated('Use withValues to avoid precision loss.')
+  @override
+  // ignore: deprecated_member_use
+  Color withOpacity(double opacity) => resolvedColor.withOpacity(opacity);
+
+  @Deprecated('Use toARGB32 for explicit conversion.')
+  @override
+  int get value => resolvedColor.toARGB32();
+
+  @Deprecated('Use a.')
+  @override
+  double get opacity => resolvedColor.a;
+
+  @Deprecated('Use a or toARGB32.')
+  @override
+  int get alpha => (toARGB32() >> 24) & 0xff;
+
+  @Deprecated('Use r or toARGB32.')
+  @override
+  int get red => (toARGB32() >> 16) & 0xff;
+
+  @Deprecated('Use g or toARGB32.')
+  @override
+  int get green => (toARGB32() >> 8) & 0xff;
+
+  @Deprecated('Use b or toARGB32.')
+  @override
+  int get blue => toARGB32() & 0xff;
 
   @override
   double get r => resolvedColor.r;

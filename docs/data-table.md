@@ -108,7 +108,8 @@ MacosTheme and high contrast. Selected text uses a contrasting foreground.
 Disabled rows suppress interaction feedback. There is no transparency or animation
 to override accessibility preferences. No inherited widget behaviour or constructor
 changes; migration from the example's former tile list is opt-in for consumers.
-List and Sidebar APIs remain valid. See the selected public API dictionary for consumer guidance.
+List and Sidebar APIs remain valid. Historical inventory hashes are untouched;
+the [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md) covers current usage.
 
 The Documents page has flat files and category tabs. It does not need expandable
 rows with aligned metadata. Existing `SidebarItems`/`SidebarItem.disclosureItems` suffice

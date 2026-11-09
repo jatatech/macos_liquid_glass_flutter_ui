@@ -1,4 +1,4 @@
-# Developer guide
+# Getting started
 
 Import `package:macos_ui/macos_ui.dart` plus Flutter public widget libraries.
 The package does not re-export Flutter widgets. Use actual exported constructors;
@@ -48,6 +48,12 @@ visual-effect material is distinct from the package's native Liquid Glass.
 The gallery sets a 480×400 minimum window; it is an app choice, not a package
 requirement or a promise that every component fits at that width.
 
+## Run a complete application
+
+For the photo-library app shown in the README, follow [Fieldnotes](examples.md).
+It includes bundled photography and uses a native window toolbar, controlled
+search, coordinated panes and a floating viewer command surface.
+
 ## Runnable consumer example
 
 [developer_example.dart](../example/lib/developer_example.dart) is a complete
@@ -79,6 +85,12 @@ settings/progress/validation, see the Sliders and selectors/Text and search page
 in `main.dart`. [Gallery instructions](../example/README.md) identify each flow.
 
 ## Choose public APIs
+
+For a native window toolbar, search, groups and pane coordination, use
+[MacosNativeToolbar](native-window-toolbar.md). Retain one owner above navigation,
+share the pane controller with MacosWindow, and provide equivalent fallback
+controls. App menus and native Edit routing remain app-owned.
+
 
 | Need | Public entry points and owning guide |
 |---|---|

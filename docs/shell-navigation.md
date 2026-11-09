@@ -1,13 +1,14 @@
 # Shell navigation and commands
 
-The shell provides hierarchical navigation and toolbar overflow with semantic
-Flutter chrome. Bounded native navigation/commands are also available through
-[shared glass surfaces](liquid-glass.md). Existing window utilities retain ownership.
+The retained Flutter shell coexists with the additive [native window toolbar](native-window-toolbar.md)
+and [native Liquid Glass surfaces](liquid-glass.md) under ADRs 0004/0005.
+Existing `macos_window_utils` integration retains window ownership.
 
 ## Navigation contract
 
 Import `package:macos_ui/macos_ui.dart`. Existing public widget types,
-constructors, callbacks and exports remain intact. `SidebarItems.currentIndex` counts selectable leaves in
+constructors, callbacks and exports remain intact. The [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md)
+and [task recipes](composition-recipes.md) describe current composition choices. `SidebarItems.currentIndex` counts selectable leaves in
 depth-first order, including collapsed leaves. Section headers and disclosure
 parents do not consume indices. This retains flat and one-level indexing and
 extends it consistently to nested disclosures. A header-only tree is allowed.
@@ -97,4 +98,17 @@ or visually inspected. No system preferences were changed. Native titlebar safe
 areas, dragging, traffic lights, zoom/fullscreen, live native menu acceptance,
 visual comparisons and VoiceOver remain open human/OS checks. Previous M3 native
 evidence is historical, not acceptance of this build. Other OS/Intel/multi-window,
-universal Release/Profile and performance remain unverified.
+universal Release/Profile and performance remain unverified. M2 is unchanged.
+
+## Selection colors — 2026-11-09 repair
+
+Sidebar state fills and inherited foregrounds are resolved together. Both Flutter
+`Icon` and `MacosIcon`, disclosure, labels and trailing text follow the selected,
+hovered or pressed fill; explicit child colors remain explicit. Overflow labels
+also follow their actual pressed fill. See [semantic colors](semantic-colors.md)
+for transparent-fill ownership, dynamic traits and regression evidence.
+
+## localization localization and direction
+
+See [localization policy](localization.md) for logical pane/disclosure/input behavior,
+app-owned locale adapters, explicit overrides and preserved seed/callback contracts.

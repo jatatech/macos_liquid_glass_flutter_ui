@@ -545,7 +545,7 @@ class MacosThemeData extends Equatable with Diagnosticable {
       brightness: t < 0.5 ? a.brightness : b.brightness,
       dividerColor: Color.lerp(a.dividerColor, b.dividerColor, t)!,
       primaryColor: Color.lerp(a.primaryColor, b.primaryColor, t)!,
-      canvasColor: Color.lerp(a.primaryColor, b.primaryColor, t)!,
+      canvasColor: Color.lerp(a.canvasColor, b.canvasColor, t)!,
       typography: MacosTypography.lerp(a.typography, b.typography, t),
       helpButtonTheme: HelpButtonThemeData.lerp(
         a.helpButtonTheme,

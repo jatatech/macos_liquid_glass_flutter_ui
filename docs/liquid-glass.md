@@ -7,6 +7,14 @@ Native mode uses actual AppKit NSGlassEffectView on supported macOS.
 Import `package:macos_ui/macos_ui.dart`. See [support](support.md) for tested scope
 and [the consumer skill](../skills/flutter-macos-golden-gate/SKILL.md) for integration.
 
+## Native window chrome or floating glass
+
+Use [MacosNativeToolbar](native-window-toolbar.md) for a real AppKit window
+toolbar with native search, command groups, coordinated panes and anchored dates.
+Use MacosGlassSurface / MacosGlassCommandSurface for bounded floating commands
+over Flutter content. These are separate APIs with different fallback contracts.
+[Fieldnotes](examples.md) demonstrates both in a real photography workspace.
+
 ## Public composition and migration
 
 The public-import [gallery](../example/lib/liquid_glass.dart) compiles both layers:

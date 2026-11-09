@@ -1,8 +1,8 @@
 # Foundational buttons
 
 `PushButton`, `MacosIconButton`, `MacosDisclosureButton` and `HelpButton` use
-semantic Flutter styling with keyboard, pointer and accessibility behavior.
-They do not independently create native views or own the application window.
+Flutter controls alongside the [native glass capability](liquid-glass.md). Native window ownership, traffic lights and opaque
+document content are unchanged. No native glass or new native channel is added.
 
 ## Public usage
 
@@ -52,7 +52,7 @@ keyboard focus. Existing ancestor focus/input/semantics exclusions still apply.
 
 All constructors, defaults, callbacks, exports, control-size extensions and public
 State class names remain. MIT attribution and the pinned upstream API inventory
-are unchanged.
+are unchanged. The [consumer skill](../skills/flutter-macos-golden-gate/SKILL.md) is available; no speculative skill/API claim is added.
 The shared interaction and opacity helpers are internal and are not exported.
 
 Push buttons retain the upstream accent/secondary/window-state gradient palette
